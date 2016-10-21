@@ -25,6 +25,8 @@ public class Game extends Canvas implements Runnable{
     public Game(){
         Window window = new Window("Practice", WIDTH, HEIGHT, this);
         handler = new Handler();
+        this.addKeyListener(new KeyInput(handler));
+        handler.addObj(new Player(200, 200, ID.Player));
     }
     
     public synchronized void start(){
@@ -86,6 +88,7 @@ public class Game extends Canvas implements Runnable{
         BufferStrategy bs = getBufferStrategy();
         if(bs == null){
             createBufferStrategy(3);
+            requestFocus();
             return;
         }
         Graphics g = bs.getDrawGraphics();
