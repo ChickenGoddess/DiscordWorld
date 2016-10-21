@@ -10,4 +10,6 @@
  */
 public enum ID {
     
+    Player();
+    
 }
