@@ -18,8 +18,8 @@ public class Game extends Canvas implements Runnable{
     
     private boolean running = false;
     private Thread thread;
-    private static int WIDTH = 620;
-    private static int HEIGHT = 420;
+    static int WIDTH = 620;
+    static int HEIGHT = 420;
     private Handler handler;
     
     public Game(){
@@ -64,7 +64,7 @@ public class Game extends Canvas implements Runnable{
             delta += (now - lastTime) / ns;
             while(delta >= 1){
                 tick();
-                delta = delta - 1;
+                delta--;
             }
             if(running){
                 render();
@@ -97,5 +97,19 @@ public class Game extends Canvas implements Runnable{
         handler.render(g);
         g.dispose();
         bs.show();
-    }    
+    }  
+    
+    public static int clamp(int var, int min, int max){
+        
+        if(var >= max){
+            return var = max;
+        }
+        else if(var <= min){
+            return var = min;
+        }
+        else{
+            return var;
+        }
+        
+    }
 }

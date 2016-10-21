@@ -22,6 +22,9 @@ public class Player extends GameObj{
     public void tick() {
         x += velX;
         y += velY;
+        
+        x = Game.clamp(x, 0, Game.WIDTH-32);
+        y = Game.clamp(y, 0, Game.HEIGHT-32);
     }
 
     @Override
