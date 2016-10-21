@@ -20,9 +20,11 @@ public class Game extends Canvas implements Runnable{
     private Thread thread;
     private static int WIDTH = 620;
     private static int HEIGHT = 420;
+    private Handler handler;
     
     public Game(){
         Window window = new Window("Practice", WIDTH, HEIGHT, this);
+        handler = new Handler();
     }
     
     public synchronized void start(){
@@ -76,20 +78,21 @@ public class Game extends Canvas implements Runnable{
     }
     
     public void tick(){
-        
+        handler.tick();
     }
     
+    
     public void render(){
-        BufferStrategy bs = this.getBufferStrategy();
+        BufferStrategy bs = getBufferStrategy();
         if(bs == null){
-            this.createBufferStrategy(3);
+            createBufferStrategy(3);
             return;
         }
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.black);
         g.fillRect(0, 0, WIDTH, HEIGHT);
+        handler.render(g);
         g.dispose();
         bs.show();
-    }
-    
+    }    
 }

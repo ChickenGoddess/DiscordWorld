@@ -24,7 +24,18 @@ public class Handler {
     }
     
     public void render(Graphics g){
-        
+        for(int i = 0; i < object.size(); i++){
+            GameObj tempObj = object.get(i);
+            tempObj.render(g);
+        }
+    }
+    
+    public void addObj(GameObj obj){
+        object.add(obj);
+    }
+    
+    public void removeObj(GameObj obj){
+        object.remove(obj);
     }
     
 }
