@@ -66,6 +66,7 @@ public class Game extends Canvas implements Runnable{
                 tick();
                 delta--;
             }
+            lastTime = System.nanoTime();
             if(running){
                 render();
             }
