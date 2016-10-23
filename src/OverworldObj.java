@@ -8,9 +8,10 @@
  *
  * @author Chicken
  */
-public enum ID {
+public abstract class OverworldObj extends GameObj{
     
-    Player(),
-    Background();
+    public OverworldObj(int x, int y, ID id) {
+        super(x, y, id);
+    }
     
 }

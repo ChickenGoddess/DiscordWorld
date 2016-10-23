@@ -3,6 +3,10 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,17 +20,23 @@ import java.awt.image.BufferStrategy;
  */
 public class Game extends Canvas implements Runnable{
     
+    BufferedImage bi;
+    ImageLoader load = new ImageLoader();
+    
     private boolean running = false;
     private Thread thread;
     static int WIDTH = 620;
     static int HEIGHT = 420;
     private Handler handler;
+    BufferedImage image;
     
     public Game(){
         Window window = new Window("Practice", WIDTH, HEIGHT, this);
         handler = new Handler();
         this.addKeyListener(new KeyInput(handler));
+        handler.addObj(new BackgroundTexture(-100, -100, ID.Background));
         handler.addObj(new Player(200, 200, ID.Player));
+        //bi = load.loadImage("C:\\Users\\Chicken\\Documents\\NetBeansProjects\\DiscordWorld\\testpic.PNG");
     }
     
     public synchronized void start(){
@@ -95,6 +105,7 @@ public class Game extends Canvas implements Runnable{
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.black);
         g.fillRect(0, 0, WIDTH, HEIGHT);
+        //g.drawImage(bi, 0, 0, null);
         handler.render(g);
         g.dispose();
         bs.show();
@@ -113,5 +124,18 @@ public class Game extends Canvas implements Runnable{
             return var;
         }
         
+    }
+    
+    public static int reverseClamp(int var, int min, int max){
+        
+        if(var >= min){
+            return var = min;
+        }
+        else if(var <= -max){
+            return var = -max;
+        }
+        else{
+            return var;
+        }
     }
 }
