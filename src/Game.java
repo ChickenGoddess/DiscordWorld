@@ -30,6 +30,7 @@ public class Game extends Canvas implements Runnable{
     private Handler handler;
     BufferedImage image;
     static boolean clamped = false;
+    private static GameCamera camera;
     
     public Game(){
         Window window = new Window("Practice", WIDTH, HEIGHT, this);
@@ -37,6 +38,7 @@ public class Game extends Canvas implements Runnable{
         this.addKeyListener(new KeyInput(handler));
         handler.addObj(new BackgroundTexture(-100, -100, ID.Background));
         handler.addObj(new Player(200, 200, ID.Player));
+        camera = new GameCamera(0,0);
         //bi = load.loadImage("C:\\Users\\Chicken\\Documents\\NetBeansProjects\\DiscordWorld\\testpic.PNG");
     }
     

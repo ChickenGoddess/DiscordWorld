@@ -25,6 +25,7 @@ public class BackgroundTexture extends OverworldObj{
 
     @Override
     public void tick() {
+        
         x -= velX;
         y -= velY;
         
