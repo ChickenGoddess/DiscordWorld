@@ -28,8 +28,8 @@ public class BackgroundTexture extends OverworldObj{
         x -= velX;
         y -= velY;
         
-        x = Game.reverseClamp(x, 0, load.getWidth(bi) - Game.WIDTH);
-        y = Game.reverseClamp(y, 0, load.getHeight(bi) - Game.HEIGHT);
+        x = Game.reverseBackgroundClamp(x, 0, load.getWidth(bi) - Game.WIDTH);
+        y = Game.reverseBackgroundClamp(y, 0, load.getHeight(bi) - Game.HEIGHT);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class BackgroundTexture extends OverworldObj{
     }
     
     public boolean isAtSide(){
-        return true;
+        return Game.isClamped();
     }
     
 }
