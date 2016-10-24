@@ -35,7 +35,7 @@ public class BackgroundTexture extends OverworldObj{
 
     @Override
     public void render(Graphics g) {
-        bi = load.loadImage("res/testpic.png");
+        bi = load.loadImage("/testpic.png");
         g.drawImage(bi, x, y, null);
     }
     
