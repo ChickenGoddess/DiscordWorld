@@ -21,7 +21,7 @@ public class ImageLoader {
     
     public BufferedImage loadImage(String filePath){
         try {
-            img = ImageIO.read(new File(filePath));
+            img = ImageIO.read(this.getClass().getResourceAsStream(filePath));
             return img;
         } 
         catch (IOException e) {
