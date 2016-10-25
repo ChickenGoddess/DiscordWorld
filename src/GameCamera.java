@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,25 +10,41 @@
  *
  * @author Chicken
  */
-public class GameCamera {
-    private float xMovePos;
-    private float yMovePos;
+public class GameCamera extends GameObj {
+    private GameObj target;
+    private boolean following;
     
-    public GameCamera(float xMovePos, float yMovePos){
-        this.xMovePos = xMovePos;
-        this.yMovePos = yMovePos;
+    public GameCamera(int x, int y){
+        super(x, y, ID.Camera);
+    }
+
+    public GameCamera(GameObj target, boolean following) {
+        super(0, 0, ID.Camera);
+        this.target = target;
+        this.following = following;
+    }
+
+    public GameCamera(GameObj target) {
+        this(target, true);
+    }
+
+
+    @Override
+    public void tick() {
+        if (this.target != null && this.following) {
+            this.setX(this.target.getPosX());
+            this.setY(this.target.getPosY());
+        }
     }
     
-    public void move(float xAmt, float yAmt){
-        xMovePos += xAmt;
-        yMovePos += yAmt;
+    public GameObj getTarget() {
+        return this.target;
     }
-    
-    public float getXOffset(){
-        return xMovePos;
+
+    public void setTarget(GameObj target) {
+        this.target = target;
     }
-    
-    public float getYOffset(){
-        return yMovePos;
-    }
+
+    @Override
+    public void render(Graphics g){};
 }

@@ -9,7 +9,7 @@
  * @author Chicken
  */
 public enum ID {
-    
+    Camera(),
     Player(),
     Background();
     
