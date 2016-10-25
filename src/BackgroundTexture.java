@@ -21,6 +21,7 @@ public class BackgroundTexture extends OverworldObj{
     
     public BackgroundTexture(int x, int y, ID id) {
         super(x, y, id);
+        bi = load.loadImage("res/testpic.png"); //Temp, probably
     }
 
     @Override
@@ -35,12 +36,10 @@ public class BackgroundTexture extends OverworldObj{
 
     @Override
     public void render(Graphics g) {
-        bi = load.loadImage("res/testpic.png");
         g.drawImage(bi, x, y, null);
     }
     
     public boolean isAtSide(){
         return Game.isClamped();
     }
-    
 }
