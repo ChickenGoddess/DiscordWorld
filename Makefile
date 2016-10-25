@@ -1,7 +1,7 @@
 all: DiscordWorld.jar
 
 DiscordWorld.jar: classes manifest_cmd.mf
-	jar cvfm DiscordWorld.jar manifest_cmd.mf res -C classes .
+	jar cvfm DiscordWorld.jar manifest_cmd.mf -C src res -C classes .
 
 classes:
 	mkdir classes
