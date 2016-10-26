@@ -1,6 +1,9 @@
 all: DiscordWorld.jar
 
-DiscordWorld.jar: classes manifest_cmd.mf
+run: DiscordWorld.jar
+	java -jar DiscordWorld.jar
+
+DiscordWorld.jar: clean classes manifest_cmd.mf
 	jar cvfm DiscordWorld.jar manifest_cmd.mf -C src res -C classes .
 
 classes:
