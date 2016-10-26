@@ -40,7 +40,9 @@ public class Game extends Canvas implements Runnable{
         handler.addObj(new BackgroundTexture(-100, -100, ID.Background));
         handler.addObj(player);
         camera = new GameCamera(player);
+        handler.setCamera(camera);
         //bi = load.loadImage("C:\\Users\\Chicken\\Documents\\NetBeansProjects\\DiscordWorld\\testpic.PNG");
+        handler.init();
     }
     
     public synchronized void start(){
@@ -93,7 +95,7 @@ public class Game extends Canvas implements Runnable{
         }
         stop();
     }
-    
+
     public void tick(){
         handler.tick();
     }

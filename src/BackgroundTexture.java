@@ -15,13 +15,16 @@ import java.awt.image.BufferedImage;
 public class BackgroundTexture extends OverworldObj{
 
     private ImageLoader load = new ImageLoader();
-    private BufferedImage bi;
     
     private boolean atSide = false;
     
     public BackgroundTexture(int x, int y, ID id) {
         super(x, y, id);
-        bi = load.loadImage("res/testpic.png"); //Temp, probably
+    }
+
+    @Override
+    public void init() {
+        this.setSprite(load.loadImage("res/testpic.png")); //Temp, probably.
     }
 
     @Override
@@ -30,16 +33,17 @@ public class BackgroundTexture extends OverworldObj{
         x -= velX;
         y -= velY;
         
-        x = Game.reverseBackgroundClamp(x, 0, load.getWidth(bi) - Game.WIDTH);
-        y = Game.reverseBackgroundClamp(y, 0, load.getHeight(bi) - Game.HEIGHT);
+        x = Game.reverseBackgroundClamp(x, 0, load.getWidth(this.getSprite()) - Game.WIDTH);
+        y = Game.reverseBackgroundClamp(y, 0, load.getHeight(this.getSprite()) - Game.HEIGHT);
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(bi, x, y, null);
+        g.drawImage(this.getSprite(), x, y, null);
     }
     
     public boolean isAtSide(){
         return Game.isClamped();
     }
 }
+

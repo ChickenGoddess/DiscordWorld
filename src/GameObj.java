@@ -19,16 +19,19 @@ public abstract class GameObj {
     protected ID id;
     protected int velX;
     protected int velY;
+    protected BufferedImage sprite;
     
     public GameObj(int x, int y, ID id){
         this.x = x;
         this.y = y;
         this.id = id;
+        sprite = null;
     }
     
+    public abstract void init();
     public abstract void tick();
     public abstract void render(Graphics g);
-    
+
     public int getPosX(){
         return x;
     }
@@ -58,5 +61,11 @@ public abstract class GameObj {
     }
     public void setID(ID id){
         this.id = id;
+    }
+    public BufferedImage getSprite(){
+        return this.sprite;
+    }
+    public void setSprite(BufferedImage sprite){
+        this.sprite = sprite;
     }
 }

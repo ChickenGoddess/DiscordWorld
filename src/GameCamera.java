@@ -28,7 +28,6 @@ public class GameCamera extends GameObj {
         this(target, true);
     }
 
-
     @Override
     public void tick() {
         if (this.target != null && this.following) {
@@ -47,4 +46,9 @@ public class GameCamera extends GameObj {
 
     @Override
     public void render(Graphics g){};
+    
+    @Override
+    public void init(){ 
+        this.setSprite(null);
+    };
 }
