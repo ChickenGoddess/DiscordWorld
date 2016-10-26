@@ -27,9 +27,8 @@ public class KeyInput extends KeyAdapter{
         
         for(int i = 0; i < handler.object.size(); i++){
             GameObj tempObj = handler.object.get(i);
-            System.out.println("Object position: " + tempObj.getPosX());
-            System.out.println(" Half of Game Size: " + Game.WIDTH/2);
-            if(tempObj.getID() == ID.Background){
+            
+            if(tempObj.getID() == ID.Player){
                 if(key == KeyEvent.VK_W){
                     tempObj.setVelY(-5);
                 }
@@ -44,7 +43,7 @@ public class KeyInput extends KeyAdapter{
                 }
             }
             
-            if(tempObj.getID() == ID.Player && Game.isClamped()){
+            if(tempObj.getID() == ID.Background){
                 if(key == KeyEvent.VK_W){
                     tempObj.setVelY(-5);
                 }
@@ -68,7 +67,8 @@ public class KeyInput extends KeyAdapter{
         
         for(int i = 0; i < handler.object.size(); i++){
             GameObj tempObj = handler.object.get(i);
-            if(tempObj.getID() == ID.Background){
+            
+            if(tempObj.getID() == ID.Player){
                 if(key == KeyEvent.VK_W){
                     tempObj.setVelY(0);
                 }
@@ -83,7 +83,7 @@ public class KeyInput extends KeyAdapter{
                 }
             }
             
-            if(tempObj.getID() == ID.Player && Game.isClamped()){
+            if(tempObj.getID() == ID.Background){
                 if(key == KeyEvent.VK_W){
                     tempObj.setVelY(0);
                 }

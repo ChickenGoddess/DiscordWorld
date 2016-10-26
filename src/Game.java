@@ -29,12 +29,13 @@ public class Game extends Canvas implements Runnable{
     static int HEIGHT = 420;
     private Handler handler;
     BufferedImage image;
-    static boolean clamped = false;
+    static boolean clampedSide = false;
+    static boolean clampedUpdown = false;
     private static GameCamera camera;
     
     public Game(){
         Window window = new Window("Practice", WIDTH, HEIGHT, this);
-        Player player = new Player(200, 200, ID.Player);
+        Player player = new Player(WIDTH/2, HEIGHT/2, ID.Player);
         handler = new Handler();
         this.addKeyListener(new KeyInput(handler));
         handler.addObj(new BackgroundTexture(-100, -100, ID.Background));
@@ -135,20 +136,21 @@ public class Game extends Canvas implements Runnable{
     public static int reverseBackgroundClamp(int var, int min, int max){
         
         if(var >= min){
-            clamped = true;
             return var = min;
         }
         else if(var <= -max){
-            clamped = true;
             return var = -max;
         }
         else{
-            clamped = false;
             return var;
         }        
     }
     
-    public static boolean isClamped(){
-            return clamped;
+    public static boolean isClampedSide(){
+        return clampedSide;
+    }
+    
+    public static boolean isClampedUpdown(){
+        return clampedUpdown;
     }
 }
