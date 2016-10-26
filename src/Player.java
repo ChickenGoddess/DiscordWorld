@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,10 +18,17 @@ import java.io.BufferedReader;
 public class Player extends GameObj{
     
     ImageLoader load = new ImageLoader();
-    BufferedImage bi;
+    ArrayList<BufferedImage> sprites = new ArrayList<BufferedImage>();
 
     public Player(int x, int y, ID id) {
         super(x, y, id);
+    }
+
+    @Override
+    public void init() {
+        BufferedImage louder = load.loadImage("res/louder.png");
+        sprites.add(louder);
+        this.setSprite(louder);
     }
 
     @Override
@@ -34,8 +42,8 @@ public class Player extends GameObj{
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.red);
-        g.drawRect(x, y, 32, 32);
+    //    g.setColor(Color.red);
+    //    g.drawRect(x, y, 32, 32);
     }
     
 }
