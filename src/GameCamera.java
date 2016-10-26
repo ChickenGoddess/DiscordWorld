@@ -30,9 +30,10 @@ public class GameCamera extends GameObj {
 
     @Override
     public void tick() {
+        
         if (this.target != null && this.following) {
-            this.setX(this.target.getPosX());
-            this.setY(this.target.getPosY());
+            this.setX(this.target.getPosX() - Game.WIDTH/2);
+            this.setY(this.target.getPosY() - Game.HEIGHT/2);
         }
     }
     

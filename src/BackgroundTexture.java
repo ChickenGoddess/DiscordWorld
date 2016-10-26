@@ -30,25 +30,6 @@ public class BackgroundTexture extends OverworldObj{
     @Override
     public void tick() {
         
-        x -= velX;
-        y -= velY;
-        
-        x = Game.reverseBackgroundClamp(x, 0, load.getWidth(this.getSprite()) - Game.WIDTH);
-        if(x >= 0 || x <= -(load.getWidth(this.getSprite()) - Game.WIDTH)){
-            Game.clampedSide = true;
-        }
-        else{
-            Game.clampedSide = false;
-        }
-        y = Game.reverseBackgroundClamp(y, 0, load.getHeight(this.getSprite()) - Game.HEIGHT);
-        if(y >= 0 || y <= -(load.getHeight(this.getSprite()) - Game.HEIGHT)){
-            Game.clampedUpdown = true;
-        }
-        else{
-            Game.clampedUpdown = false;
-        }
-        System.out.println("Side clamp: " + Game.clampedSide);
-        System.out.println("Vertical clamp: " + Game.clampedUpdown);
     }
 
     @Override

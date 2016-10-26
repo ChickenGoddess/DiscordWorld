@@ -34,10 +34,10 @@ public class Player extends GameObj{
     @Override
     public void tick() {
         x += velX;
-        y += velY;
+        y += velY;        
         
-        x = Game.clamp(x, 0, Game.WIDTH);
-        y = Game.clamp(y, 0, Game.HEIGHT);
+        x = Game.clamp(x, -100, Game.CURRENTTEXTURE.sprite.getWidth() - 100);
+        y = Game.clamp(y, -100, Game.CURRENTTEXTURE.sprite.getHeight() - 100);
     }
 
     @Override

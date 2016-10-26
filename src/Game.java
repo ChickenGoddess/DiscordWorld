@@ -32,16 +32,20 @@ public class Game extends Canvas implements Runnable{
     static boolean clampedSide = false;
     static boolean clampedUpdown = false;
     private static GameCamera camera;
+    static BackgroundTexture CURRENTTEXTURE;
     
     public Game(){
         Window window = new Window("Practice", WIDTH, HEIGHT, this);
         Player player = new Player(WIDTH/2, HEIGHT/2, ID.Player);
         handler = new Handler();
         this.addKeyListener(new KeyInput(handler));
-        handler.addObj(new BackgroundTexture(-100, -100, ID.Background));
+        BackgroundTexture texture = new BackgroundTexture(-100, -100, ID.Background);
+        handler.addObj(texture);
         handler.addObj(player);
         camera = new GameCamera(player);
         handler.setCamera(camera);
+        handler.addObj(camera);
+        CURRENTTEXTURE = texture;
         //bi = load.loadImage("C:\\Users\\Chicken\\Documents\\NetBeansProjects\\DiscordWorld\\testpic.PNG");
         handler.init();
     }
