@@ -97,6 +97,11 @@ public class Game extends Canvas implements Runnable{
                 System.out.println("FPS: " + frames);
                 frames = 0;
             }
+            try {
+                Thread.sleep(10); //Pause thread for x milliseconds. May need to adjust this value later.
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         stop();
     }
