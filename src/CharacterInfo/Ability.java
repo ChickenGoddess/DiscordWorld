@@ -9,6 +9,6 @@ package CharacterInfo;
  *
  * @author User
  */
-public class Abilities {
+public class Ability {
     
 }
