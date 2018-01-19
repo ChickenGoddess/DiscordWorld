@@ -38,8 +38,8 @@ public class Player extends GameObj{
         x += velX;
         y += velY;        
         
-        x = Game.clamp(x, -100, Game.CURRENTTEXTURE.sprite.getWidth() - 100 - width);
-        y = Game.clamp(y, -100, Game.CURRENTTEXTURE.sprite.getHeight() - 100 - height);
+        x = Game.clamp(x, Game.BACKGROUND_OFFSET_X, Game.CURRENTTEXTURE.sprite.getWidth() + Game.BACKGROUND_OFFSET_X - width);
+        y = Game.clamp(y, Game.BACKGROUND_OFFSET_Y, Game.CURRENTTEXTURE.sprite.getHeight() + Game.BACKGROUND_OFFSET_Y - height);
     }
 
     @Override

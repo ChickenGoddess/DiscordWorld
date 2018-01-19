@@ -33,13 +33,19 @@ public class Game extends Canvas implements Runnable{
     static boolean clampedUpdown = false;
     private static GameCamera camera;
     static BackgroundTexture CURRENTTEXTURE;
+    static int BACKGROUND_OFFSET_X;
+    static int BACKGROUND_OFFSET_Y;
+    Player player;
     
     public Game(){
+        setBackgroundOffset(0, 0);
         Window window = new Window("Practice", WIDTH, HEIGHT, this);
-        Player player = new Player(WIDTH/2, HEIGHT/2, ID.Player);
+        player = new Player(WIDTH/2, HEIGHT/2, ID.Player);
+        spawnPlayer(400, 400);
         handler = new Handler();
         this.addKeyListener(new KeyInput(handler));
-        BackgroundTexture texture = new BackgroundTexture(-100, -100, ID.Background);
+        BackgroundTexture texture = new BackgroundTexture(BACKGROUND_OFFSET_X, BACKGROUND_OFFSET_Y, ID.Background);
+        System.out.println(texture.getHeight());
         handler.addObj(texture);
         handler.addObj(player);
         camera = new GameCamera(player);
@@ -48,6 +54,16 @@ public class Game extends Canvas implements Runnable{
         CURRENTTEXTURE = texture;
         //bi = load.loadImage("C:\\Users\\Chicken\\Documents\\NetBeansProjects\\DiscordWorld\\testpic.PNG");
         handler.init();
+    }
+    
+    void spawnPlayer(int x, int y){
+        player.setX(x);
+        player.setY(y);
+    }
+    
+    void setBackgroundOffset(int x, int y){
+        BACKGROUND_OFFSET_X = x;
+        BACKGROUND_OFFSET_Y = y;
     }
     
     public synchronized void start(){
@@ -122,7 +138,7 @@ public class Game extends Canvas implements Runnable{
         g.setColor(Color.black);
         g.fillRect(0, 0, WIDTH, HEIGHT);
         //g.drawImage(bi, 0, 0, null);
-        handler.render(g);
+        handler.render(g, WIDTH, HEIGHT);
         g.dispose();
         bs.show();
     }  

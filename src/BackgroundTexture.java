@@ -25,7 +25,10 @@ public class BackgroundTexture extends OverworldObj{
 
     @Override
     public void init() {
-        this.setSprite(load.loadImage("res/testpic.png")); //Temp, probably.
+        BufferedImage bi = load.loadImage("res/testpic.png");
+        this.setSprite(bi); //Temp, probably.
+        this.width = bi.getWidth();
+        this.height = bi.getHeight();
     }
 
     @Override

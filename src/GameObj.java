@@ -28,12 +28,22 @@ public abstract class GameObj {
         this.y = y;
         this.id = id;
         sprite = null;
+        height = 0;
+        width = 0;
     }
     
     public abstract void init();
     public abstract void tick();
     public abstract void render(Graphics g);
 
+    public int getHeight(){
+        return height;
+    }
+    
+    public int getWidth(){
+        return width;
+    }
+    
     public int getPosX(){
         return x;
     }

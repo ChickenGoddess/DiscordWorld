@@ -12,7 +12,8 @@ import java.awt.Graphics;
  */
 public class GameCamera extends GameObj {
     private GameObj target;
-    private boolean following;
+    private boolean followX;
+    private boolean followY;
     
     public GameCamera(int x, int y){
         super(x, y, ID.Camera);
@@ -21,7 +22,10 @@ public class GameCamera extends GameObj {
     public GameCamera(GameObj target, boolean following) {
         super(0, 0, ID.Camera);
         this.target = target;
-        this.following = following;
+        this.followX = following;
+        this.followY = following;
+        height = Game.HEIGHT;
+        width = Game.WIDTH;
     }
 
     public GameCamera(GameObj target) {
@@ -31,14 +35,39 @@ public class GameCamera extends GameObj {
     @Override
     public void tick() {
         
-        if (this.target != null && this.following) {
+        if (this.target != null && this.followX && this.followY) {
             this.setX(this.target.getPosX() - Game.WIDTH/2);
             this.setY(this.target.getPosY() - Game.HEIGHT/2);
+        }
+        else if(this.target != null && this.followX && !this.followY){
+            this.setY(y);
+            this.setX(this.target.getPosX() - Game.WIDTH/2);
+        }
+        else if(this.target != null && !this.followX && this.followY){
+            this.setX(x);
+            this.setY(this.target.getPosY() - Game.HEIGHT/2);
+        }
+        else{
+            this.setX(x);
+            this.setY(y);
         }
     }
     
     public GameObj getTarget() {
         return this.target;
+    }
+    
+    public void setFollowing(boolean followX, boolean followY){
+        this.followX = followX;
+        this.followY = followY;
+    }
+    
+    public void setFollowX(boolean x){
+        this.followX = x;
+    }
+    
+    public void setFollowY(boolean y){
+        this.followY = y;
     }
 
     public void setTarget(GameObj target) {
