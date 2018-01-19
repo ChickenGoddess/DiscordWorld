@@ -9,6 +9,12 @@ package Events;
  *
  * @author User
  */
-public class Event {
+public abstract class Event {
+    
+    public Event(){
+        
+    }
+    
+    public abstract void trigger();
     
 }

@@ -27,6 +27,8 @@ public class Player extends GameObj{
     @Override
     public void init() {
         BufferedImage louder = load.loadImage("res/louder.png");
+        width = louder.getWidth();
+        height = louder.getHeight();
         sprites.add(louder);
         this.setSprite(louder);
     }
@@ -36,8 +38,8 @@ public class Player extends GameObj{
         x += velX;
         y += velY;        
         
-        x = Game.clamp(x, -100, Game.CURRENTTEXTURE.sprite.getWidth() - 100);
-        y = Game.clamp(y, -100, Game.CURRENTTEXTURE.sprite.getHeight() - 100);
+        x = Game.clamp(x, -100, Game.CURRENTTEXTURE.sprite.getWidth() - 100 - width);
+        y = Game.clamp(y, -100, Game.CURRENTTEXTURE.sprite.getHeight() - 100 - height);
     }
 
     @Override

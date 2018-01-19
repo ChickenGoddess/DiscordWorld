@@ -1,6 +1,7 @@
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.FileReader;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

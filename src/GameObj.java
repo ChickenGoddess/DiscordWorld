@@ -20,6 +20,8 @@ public abstract class GameObj {
     protected int velX;
     protected int velY;
     protected BufferedImage sprite;
+    protected int height;
+    protected int width;
     
     public GameObj(int x, int y, ID id){
         this.x = x;

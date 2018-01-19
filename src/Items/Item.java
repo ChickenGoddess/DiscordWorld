@@ -11,4 +11,11 @@ package Items;
  */
 public class Item {
     
+    protected String name;
+    protected int weight;
+    
+    public Item(){
+        
+    }
+    
 }

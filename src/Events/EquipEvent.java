@@ -9,6 +9,15 @@ package Events;
  *
  * @author User
  */
-public class EquipEvent {
+public class EquipEvent extends Event{
+
+    @Override
+    public void trigger() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public boolean match(){
+        return true;
+    }
     
 }

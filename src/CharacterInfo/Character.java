@@ -5,28 +5,47 @@
  */
 package CharacterInfo;
 
+import Items.AccessoryItem;
+import Items.ArmorItem;
+import Items.Item;
+import Items.WeaponItem;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author User
  */
 public abstract class Character {
     
-    private String name;
-    private int age;
-    private int position;
+    protected String name;
+    protected int age;
+    protected int position;
     
     //stats
-    private int strength;
-    private int dexterity;
-    private int constitution;
-    private int intelligence;
-    private int wisdom;
-    private int charisma;
-    private int luck;
-    private int magic;
+    protected int strength;
+    protected int dexterity;
+    protected int constitution;
+    protected int intelligence;
+    protected int wisdom;
+    protected int charisma;
+    protected int luck;
+    protected int magic;
     
     //is main character?
-    private boolean isMain;
+    protected boolean isMain;
+    
+    //holding
+    protected List<Item> heldItems = new ArrayList<>();
+    protected WeaponItem mainHand;
+    protected WeaponItem offHand;
+    protected ArmorItem armor;
+    protected ArmorItem helmet;
+    protected ArmorItem bracers;
+    protected AccessoryItem accessory1;
+    protected AccessoryItem accessory2;
+    protected AccessoryItem accessory3;
+    protected AccessoryItem accessory4;
     
     public Character(String name, int age){
         this.name = name;
@@ -194,7 +213,7 @@ public abstract class Character {
     /**
      * @return the isMain
      */
-    public boolean isIsMain() {
+    public boolean isMain() {
         return isMain;
     }
 

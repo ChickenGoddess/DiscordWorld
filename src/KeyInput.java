@@ -42,7 +42,7 @@ public class KeyInput extends KeyAdapter{
                     tempObj.setVelX(5);
                 }
             }
-            
+            /*
             if(tempObj.getID() == ID.Background){
                 if(key == KeyEvent.VK_W){
                     tempObj.setVelY(-5);
@@ -56,6 +56,10 @@ public class KeyInput extends KeyAdapter{
                 if(key == KeyEvent.VK_D){
                     tempObj.setVelX(5);
                 }
+            }
+*/
+            if(key == KeyEvent.VK_ESCAPE){
+                System.exit(0);
             }
         }
     }
