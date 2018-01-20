@@ -1,0 +1,25 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#	modified:   build/classes/BackgroundTexture.class
+#	modified:   build/classes/GameObj.class
+#	modified:   build/classes/KeyInput.class
+#	modified:   build/classes/Player.class
+#	modified:   nbproject/private/private.xml
+#	modified:   src/BackgroundTexture.java
+#	modified:   src/CharacterInfo/Character.java
+#	modified:   src/Events/EquipEvent.java
+#	modified:   src/Events/Event.java
+#	modified:   src/GameObj.java
+#	modified:   src/Items/Item.java
+#	modified:   src/KeyInput.java
+#	modified:   src/Player.java
+#
+# Untracked files:
+#	src/Items/AccessoryItem.java
+#	src/Items/ArmorItem.java
+#	src/Items/WeaponItem.java
+#
+
