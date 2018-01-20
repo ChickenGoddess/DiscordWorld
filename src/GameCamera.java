@@ -36,16 +36,16 @@ public class GameCamera extends GameObj {
     public void tick() {
         
         if (this.target != null && this.followX && this.followY) {
-            this.setX(this.target.getPosX() - Game.WIDTH/2);
-            this.setY(this.target.getPosY() - Game.HEIGHT/2);
+            this.setX(this.target.getPosX() - Game.WIDTH/2 + this.target.getWidth()/2);
+            this.setY(this.target.getPosY() - Game.HEIGHT/2 + this.target.getHeight()/2);
         }
         else if(this.target != null && this.followX && !this.followY){
             this.setY(y);
-            this.setX(this.target.getPosX() - Game.WIDTH/2);
+            this.setX(this.target.getPosX() - Game.WIDTH/2 + this.target.getWidth()/2);
         }
         else if(this.target != null && !this.followX && this.followY){
             this.setX(x);
-            this.setY(this.target.getPosY() - Game.HEIGHT/2);
+            this.setY(this.target.getPosY() - Game.HEIGHT/2 + this.target.getHeight()/2);
         }
         else{
             this.setX(x);

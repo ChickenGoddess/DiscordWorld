@@ -90,11 +90,11 @@ public class Game extends Canvas implements Runnable{
     
     @Override
     public void run() {
-        long lastTime = System.nanoTime();
+        double lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
-        long timer = System.currentTimeMillis();
+        double timer = System.currentTimeMillis();
         int frames = 0;
         while(running){
             long now = System.nanoTime();
@@ -114,7 +114,7 @@ public class Game extends Canvas implements Runnable{
                 frames = 0;
             }
             try {
-                Thread.sleep(10); //Pause thread for x milliseconds. May need to adjust this value later.
+                Thread.sleep(16); //Pause thread for x milliseconds. May need to adjust this value later.
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
