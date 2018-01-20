@@ -22,6 +22,8 @@ public class Handler {
     private static int BACKGROUND_WIDTH = 0;
     private boolean freeCam = true;
     private boolean done = true;
+    private boolean largerX = false;
+    private boolean largerY = false;
     
     public void init() {
         for (GameObj tempObj : object) {
@@ -32,6 +34,12 @@ public class Handler {
                 BACKGROUND_HEIGHT = tempObj.getHeight();
                 BACKGROUND_WIDTH = tempObj.getWidth();
             }
+        }
+        if(BACKGROUND_WIDTH <= Game.WIDTH){
+            largerX = true;
+        }
+        if(BACKGROUND_HEIGHT <= Game.HEIGHT - 18){
+            largerY = true;
         }
         initialized = true;
     }
@@ -60,32 +68,82 @@ public class Handler {
                     if(freeCam = true){
                         this.camera.setFollowing(true, true);
                     }
-                    if(tempObj.getPosX() <= Game.WIDTH/2 + Game.BACKGROUND_OFFSET_X - camera.getTarget().getWidth()/2){
-                        this.camera.setFollowX(false);
-                        this.camera.setX(0);
-                        done = false;
-                        freeCam = false;
-                    } if(tempObj.getPosY() <= Game.HEIGHT/2 + Game.BACKGROUND_OFFSET_Y - camera.getTarget().getHeight()/2){
+                    if(largerX == false && largerY == false){
+                        if(tempObj.getPosX() <= Game.WIDTH/2 + Game.BACKGROUND_OFFSET_X - camera.getTarget().getWidth()/2){
+                            this.camera.setFollowX(false);
+                            this.camera.setX(0);
+                            done = false;
+                            freeCam = false;
+                        } if(tempObj.getPosY() <= Game.HEIGHT/2 + Game.BACKGROUND_OFFSET_Y - camera.getTarget().getHeight()/2){
+                            this.camera.setFollowY(false);
+                            this.camera.setY(0);
+                            done = false;
+                            freeCam = false;
+                        } if(tempObj.getPosX() >= BACKGROUND_WIDTH - Game.WIDTH/2 + Game.BACKGROUND_OFFSET_X - camera.getTarget().getWidth()/2){
+                            this.camera.setFollowX(false);
+                            this.camera.setX(BACKGROUND_WIDTH - Game.WIDTH);
+                            done = false;
+                            freeCam = false;
+
+                        } if(tempObj.getPosY() >= BACKGROUND_HEIGHT - Game.HEIGHT/2 + Game.BACKGROUND_OFFSET_Y - 6){
+                            this.camera.setFollowY(false);
+                            this.camera.setY(BACKGROUND_HEIGHT - Game.HEIGHT + camera.getTarget().getHeight()/2 - 6);
+                            done = false;
+                            freeCam = false;
+                        } 
+                        if(done = true){
+                            freeCam = true;
+                        }
+                        done = true;
+                    } else if(largerX == true && largerY == false){
+                        this.camera.setX(BACKGROUND_WIDTH/2 - Game.WIDTH/2);
+                        if(freeCam = true){
+                            this.camera.setFollowing(false, true);
+                        }
+                        if(tempObj.getPosY() <= Game.HEIGHT/2 + Game.BACKGROUND_OFFSET_Y - camera.getTarget().getHeight()/2){
+                            this.camera.setFollowY(false);
+                            this.camera.setY(0);
+                            done = false;
+                            freeCam = false;
+                        }
+                        if(tempObj.getPosY() >= BACKGROUND_HEIGHT - Game.HEIGHT/2 + Game.BACKGROUND_OFFSET_Y - 6){
+                            this.camera.setFollowY(false);
+                            this.camera.setY(BACKGROUND_HEIGHT - Game.HEIGHT + camera.getTarget().getHeight()/2 - 6);
+                            done = false;
+                            freeCam = false;
+                        }
+                        if(done = true){
+                            freeCam = true;
+                        }
+                        done = true;
+                    } else if(largerY == true && largerX == false){
+                        this.camera.setY(BACKGROUND_HEIGHT/2 - Game.HEIGHT/2);
+                        if(freeCam = true){
+                            this.camera.setFollowing(true, false);
+                        }
+                        if(tempObj.getPosX() <= Game.WIDTH/2 + Game.BACKGROUND_OFFSET_X - camera.getTarget().getWidth()/2){
+                            this.camera.setFollowX(false);
+                            this.camera.setX(0);
+                            done = false;
+                            freeCam = false;
+                        }
+                        if(done = true){
+                            freeCam = true;
+                        }
+                        done = true;
+                        if(tempObj.getPosX() >= BACKGROUND_WIDTH - Game.WIDTH/2 + Game.BACKGROUND_OFFSET_X - camera.getTarget().getWidth()/2){
+                            this.camera.setFollowX(false);
+                            this.camera.setX(BACKGROUND_WIDTH - Game.WIDTH);
+                            done = false;
+                            freeCam = false;
+
+                        }
+                    } else if(largerX == true && largerY == true){
                         this.camera.setFollowY(false);
-                        this.camera.setY(0);
-                        done = false;
-                        freeCam = false;
-                    } if(tempObj.getPosX() >= BACKGROUND_WIDTH - Game.WIDTH/2 + Game.BACKGROUND_OFFSET_X - camera.getTarget().getWidth()/2){
                         this.camera.setFollowX(false);
-                        this.camera.setX(BACKGROUND_WIDTH - Game.WIDTH);
-                        done = false;
-                        freeCam = false;
-                        
-                    } if(tempObj.getPosY() >= BACKGROUND_HEIGHT - Game.HEIGHT/2 + Game.BACKGROUND_OFFSET_Y - 6){
-                        this.camera.setFollowY(false);
-                        this.camera.setY(BACKGROUND_HEIGHT - Game.HEIGHT + camera.getTarget().getHeight()/2 - 6);
-                        done = false;
-                        freeCam = false;
+                        this.camera.setX(BACKGROUND_WIDTH/2 - Game.WIDTH/2);
+                        this.camera.setY(BACKGROUND_HEIGHT/2 - Game.HEIGHT/2 + 18);
                     }
-                    if(done = true){
-                        freeCam = true;
-                    }
-                    done = true;
                 }
 
                 int xDelta = tempObj.getPosX() - this.camera.getPosX();

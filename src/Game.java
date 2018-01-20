@@ -36,10 +36,11 @@ public class Game extends Canvas implements Runnable{
     static int BACKGROUND_OFFSET_X;
     static int BACKGROUND_OFFSET_Y;
     Player player;
+    static Window window;
     
     public Game(){
         setBackgroundOffset(0, 0);
-        Window window = new Window("Practice", WIDTH, HEIGHT, this);
+        window = new Window("Practice", WIDTH, HEIGHT, this);
         player = new Player(WIDTH/2, HEIGHT/2, ID.Player);
         spawnPlayer(400, 400);
         handler = new Handler();
