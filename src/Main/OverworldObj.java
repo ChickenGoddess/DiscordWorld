@@ -17,10 +17,12 @@ public abstract class OverworldObj extends GameObj{
     }
     
     public void collision(OverworldObj object){
-        if(this.getPosX() < (object.getPosX() + object.getOriginWidth()) * Game.getScale() &&
-                this.getPosY() < (object.getPosY() + object.getOriginWidth()) * Game.getScale() &&
-                ){
-            
+        if(this.getPosX() <= (object.getPosX() + object.getOriginWidth()) * Game.getScale() &&
+                this.getPosY() <= (object.getPosY() + object.getOriginWidth()) * Game.getScale() &&
+                (this.getPosX() + this.getOriginWidth()) * Game.getScale() >= object.getPosX() &&
+                (this.getPosY() + this.getOriginHeight()) * Game.getScale() >= object.getPosY()){
+            this.setVelX(0);
+            this.setVelY(0);
         }
     }
     
