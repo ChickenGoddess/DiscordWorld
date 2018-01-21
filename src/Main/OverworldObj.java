@@ -29,6 +29,8 @@ public abstract class OverworldObj extends GameObj{
             System.out.println("Colided");
             this.setVelX(0);
             this.setVelY(0);
+            object.setVelX(0);
+            object.setVelY(0);
             //System.out.println(this.getPosX() + "/ " + object.getPosX() + "/ " + object.getOriginWidth());
             //System.out.println("Stuff");
         }
