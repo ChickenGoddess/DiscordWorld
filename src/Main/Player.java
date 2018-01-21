@@ -31,6 +31,8 @@ public class Player extends GameObj{
         BufferedImage louder = load.loadImage("../res/louder.png");
         width = louder.getWidth();
         height = louder.getHeight();
+        origin_width = width;
+        origin_height = height;
         sprites.add(louder);
         this.setSprite(louder);
     }
@@ -40,8 +42,8 @@ public class Player extends GameObj{
         x += velX;
         y += velY;        
         
-        x = Game.clamp(x, Game.BACKGROUND_OFFSET_X, Game.CURRENTTEXTURE.sprite.getWidth() + Game.BACKGROUND_OFFSET_X - width);
-        y = Game.clamp(y, Game.BACKGROUND_OFFSET_Y, Game.CURRENTTEXTURE.sprite.getHeight() + Game.BACKGROUND_OFFSET_Y - height);
+        //x = Game.clamp(x, Game.BACKGROUND_OFFSET_X, Game.CURRENTTEXTURE.sprite.getWidth() + Game.BACKGROUND_OFFSET_X - width);
+        //y = Game.clamp(y, Game.BACKGROUND_OFFSET_Y, Game.CURRENTTEXTURE.sprite.getHeight() + Game.BACKGROUND_OFFSET_Y - height);
     }
 
     @Override

@@ -26,6 +26,7 @@ public class Handler {
     private boolean done = true;
     private boolean largerX = false;
     private boolean largerY = false;
+    private static boolean changedScale = false;
     
     public void init() {
         for (GameObj tempObj : object) {
@@ -70,6 +71,7 @@ public class Handler {
                     if(freeCam = true){
                         this.camera.setFollowing(true, true);
                     }
+                    /*
                     if(largerX == false && largerY == false){
                         if(tempObj.getPosX() <= Game.WIDTH/2 + Game.BACKGROUND_OFFSET_X - camera.getTarget().getWidth()/2){
                             this.camera.setFollowX(false);
@@ -146,11 +148,17 @@ public class Handler {
                         this.camera.setX(BACKGROUND_WIDTH/2 - Game.WIDTH/2);
                         this.camera.setY(BACKGROUND_HEIGHT/2 - Game.HEIGHT/2 + 18);
                     }
+*/
                 }
 
                 int xDelta = tempObj.getPosX() - this.camera.getPosX();
                 int yDelta = tempObj.getPosY() - this.camera.getPosY();
-                g.drawImage(tempSprite, xDelta, yDelta, null);
+                if(getChangeScaled() == true){
+                    changeScaled(false);
+                    tempObj.setHeight((int)(tempObj.getHeight() * Game.getScale()));
+                    tempObj.setWidth((int)(tempObj.getHeight() * Game.getScale()));
+                }
+                g.drawImage(tempSprite, xDelta, yDelta, (int)(Game.getScale() * tempObj.getOriginWidth()), (int)(Game.getScale() * tempObj.getOriginHeight()), null);
             }
         }
     }
@@ -165,5 +173,11 @@ public class Handler {
     
     public void setCamera(GameCamera camera) {
         this.camera = camera;
+    }
+    public static void changeScaled(boolean change){
+        changedScale = change;
+    }
+    public boolean getChangeScaled(){
+        return changedScale;
     }
 }

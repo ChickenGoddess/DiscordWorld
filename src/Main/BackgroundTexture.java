@@ -31,6 +31,9 @@ public class BackgroundTexture extends OverworldObj{
         this.setSprite(bi); //Temp, probably.
         this.width = bi.getWidth();
         this.height = bi.getHeight();
+        this.origin_width = width;
+        this.origin_height = height;
+        
     }
 
     @Override
@@ -40,7 +43,7 @@ public class BackgroundTexture extends OverworldObj{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(this.getSprite(), x, y, null);
+        g.drawImage(this.getSprite(), x, y, (int)(width * Game.getScale()), (int)(height * Game.getScale()), null);
     }
 }
 

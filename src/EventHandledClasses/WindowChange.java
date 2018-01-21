@@ -6,6 +6,7 @@
 package EventHandledClasses;
 
 import Main.Game;
+import Main.Handler;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
@@ -32,11 +33,11 @@ public class WindowChange extends JPanel{
     private class FrameListen implements ComponentListener{
         @Override
         public void componentHidden(ComponentEvent arg0){
-            System.out.println("Hidden");
+            //System.out.println("Hidden");
         }
         @Override
         public void componentMoved(ComponentEvent arg0){
-            System.out.println("Moved");
+            //System.out.println("Moved");
         }
 
         @Override
@@ -45,20 +46,17 @@ public class WindowChange extends JPanel{
             prevHeight = Game.getFrameHeight();
             Game.setWidth(frame.getWidth());
             Game.setHeight(frame.getHeight());
-            System.out.println(prevWidth + ", " + prevHeight + ", " + Game.getFrameWidth() + ", " + Game.getFrameHeight());
+            Handler.changeScaled(true);
             if(frame.getWidth() >= frame.getHeight()){
-                temp = (frame.getHeight() - prevHeight)/prevHeight;
-                System.out.println("Height: " + temp);
-                //Game.setScale(WIDTH);
+                Game.setTemp(Game.getFrameHeight());
             } else{
-                temp = (frame.getWidth() - prevWidth)/prevWidth;
-                System.out.println("Width: " + temp);
+                Game.setTemp(Game.getFrameWidth());
             }
         }
 
         @Override
         public void componentShown(ComponentEvent e) {
-            System.out.println("Shown");
+            //System.out.println("Shown");
         }
         
     }

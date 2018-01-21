@@ -24,6 +24,8 @@ public abstract class GameObj {
     protected BufferedImage sprite;
     protected int height;
     protected int width;
+    protected int origin_width;
+    protected int origin_height;
     
     public GameObj(int x, int y, ID id){
         this.x = x;
@@ -81,5 +83,23 @@ public abstract class GameObj {
     }
     public void setSprite(BufferedImage sprite){
         this.sprite = sprite;
+    }
+    public void setOriginWidth(int width){
+        this.origin_width = width;
+    }
+    public void setOriginHeight(int height){
+        this.origin_height = height;
+    }
+    public int getOriginWidth(){
+        return origin_width;
+    }
+    public int getOriginHeight(){
+        return origin_height;
+    }
+    public void setWidth(int width){
+        this.width = width;
+    }
+    public void setHeight(int height){
+        this.height = height;
     }
 }

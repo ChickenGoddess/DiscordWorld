@@ -30,8 +30,10 @@ public class Game extends Canvas implements Runnable{
     
     private boolean running = false;
     private Thread thread;
-    static int WIDTH = 620;
-    static int HEIGHT = 420;
+    static int ORIGIN_WIDTH = 620;
+    static int ORIGIN_HEIGHT = 420;
+    static int WIDTH = ORIGIN_WIDTH;
+    static int HEIGHT = ORIGIN_HEIGHT;
     private Handler handler;
     BufferedImage image;
     static boolean clampedSide = false;
@@ -42,7 +44,9 @@ public class Game extends Canvas implements Runnable{
     static int BACKGROUND_OFFSET_Y;
     Player player;
     static Window window;
-    private static double SCALE = 1.00;
+    private static double SCALE = 1.0000000000000000;
+    private static double TEMP = HEIGHT;
+    private static double PREV_TEMP = HEIGHT;
     
     public Game(){
         setBackgroundOffset(0, 0);
@@ -115,9 +119,113 @@ public class Game extends Canvas implements Runnable{
                 render();
             }
             frames++;
+            if(System.currentTimeMillis() - timer > 100){
+                calculateScale();
+                if(HEIGHT == ORIGIN_HEIGHT){
+                    SCALE = 1.0;
+                }
+                if(HEIGHT >= WIDTH && WIDTH == ORIGIN_WIDTH){
+                    SCALE = 1 + (ORIGIN_WIDTH - ORIGIN_HEIGHT)/(double)ORIGIN_HEIGHT;
+                    TEMP = WIDTH;
+                    PREV_TEMP = WIDTH;
+                }
+                if(WIDTH >= HEIGHT && HEIGHT == ORIGIN_HEIGHT*2){
+                    SCALE = 2.0;
+                    TEMP = ORIGIN_HEIGHT * 2;
+                    PREV_TEMP = ORIGIN_HEIGHT * 2;
+                }
+                if(HEIGHT >= WIDTH && WIDTH == ORIGIN_HEIGHT * 2){
+                    SCALE = 2.0;
+                    TEMP = ORIGIN_HEIGHT * 2;
+                    PREV_TEMP = ORIGIN_HEIGHT * 2;
+                }
+                if(WIDTH >= HEIGHT && (double) HEIGHT == (double)ORIGIN_HEIGHT*1.5){
+                    SCALE = 1.5;
+                    //System.out.println("SCALE @4: " + SCALE);
+                    TEMP = ORIGIN_HEIGHT * 1.5;
+                    PREV_TEMP = ORIGIN_HEIGHT * 1.5;
+                    //System.out.println("SCALE AFTER 4: " + SCALE);
+                }
+                if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 1.5){
+                    SCALE = 1.5;
+                    TEMP = ORIGIN_HEIGHT * 1.5;
+                    PREV_TEMP = ORIGIN_HEIGHT * 1.5;
+                }
+                if(WIDTH >= HEIGHT && (double)HEIGHT == (double)ORIGIN_HEIGHT*1.25){
+                    SCALE = 1.25;
+                    TEMP = ORIGIN_HEIGHT * 1.25;
+                    PREV_TEMP = ORIGIN_HEIGHT * 1.25;
+                }
+                if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 1.25){
+                    SCALE = 1.25;
+                    TEMP = ORIGIN_HEIGHT * 1.25;
+                    PREV_TEMP = ORIGIN_HEIGHT * 1.25;
+                }
+                if(WIDTH >= HEIGHT && (double)WIDTH == (double)ORIGIN_HEIGHT*1.75){
+                    SCALE = 1.75;
+                    TEMP = ORIGIN_HEIGHT * 1.75;
+                    PREV_TEMP = ORIGIN_HEIGHT * 1.75;
+                }
+                if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 1.75){
+                    SCALE = 3;
+                    TEMP = ORIGIN_HEIGHT * 3;
+                    PREV_TEMP = ORIGIN_HEIGHT * 3;
+                }
+                if(WIDTH >= HEIGHT && (double)WIDTH == (double)ORIGIN_HEIGHT*3){
+                    SCALE = 3;
+                    TEMP = ORIGIN_HEIGHT * 3;
+                    PREV_TEMP = ORIGIN_HEIGHT * 3;
+                }
+                if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 3){
+                    SCALE = 3;
+                    TEMP = ORIGIN_HEIGHT * 3;
+                    PREV_TEMP = ORIGIN_HEIGHT * 3;
+                }
+                if(WIDTH >= HEIGHT && (double)WIDTH == (double)ORIGIN_HEIGHT*4){
+                    SCALE = 4;
+                    TEMP = ORIGIN_HEIGHT * 4;
+                    PREV_TEMP = ORIGIN_HEIGHT * 4;
+                }
+                if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 4){
+                    SCALE = 4;
+                    TEMP = ORIGIN_HEIGHT * 4;
+                    PREV_TEMP = ORIGIN_HEIGHT * 4;
+                }
+                if(WIDTH >= HEIGHT && (double)WIDTH == (double)ORIGIN_HEIGHT*5){
+                    SCALE = 5;
+                    TEMP = ORIGIN_HEIGHT * 5;
+                    PREV_TEMP = ORIGIN_HEIGHT * 5;
+                }
+                if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 5){
+                    SCALE = 5;
+                    TEMP = ORIGIN_HEIGHT * 5;
+                    PREV_TEMP = ORIGIN_HEIGHT * 5;
+                }
+                if(WIDTH >= HEIGHT && (double)WIDTH == (double)ORIGIN_HEIGHT*2.5){
+                    SCALE = 2.5;
+                    TEMP = ORIGIN_HEIGHT * 2.5;
+                    PREV_TEMP = ORIGIN_HEIGHT * 2.5;
+                }
+                if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 2.5){
+                    SCALE = 2.5;
+                    TEMP = ORIGIN_HEIGHT * 2.5;
+                    PREV_TEMP = ORIGIN_HEIGHT * 2.5;
+                }
+                if(WIDTH >= HEIGHT && (double)WIDTH == (double)ORIGIN_HEIGHT*3.5){
+                    SCALE = 3.5;
+                    TEMP = ORIGIN_HEIGHT * 3.5;
+                    PREV_TEMP = ORIGIN_HEIGHT * 3.5;
+                }
+                if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 3.5){
+                    SCALE = 3.5;
+                    TEMP = ORIGIN_HEIGHT * 3.5;
+                    PREV_TEMP = ORIGIN_HEIGHT * 3.5;
+                }
+            }
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
                 System.out.println("FPS: " + frames);
+                System.out.println("SCALE: " + SCALE);
                 frames = 0;
             }
             try {
@@ -207,7 +315,18 @@ public class Game extends Canvas implements Runnable{
     public static void setScale(double scale){
         SCALE = scale;
     }
-    public double getScale(){
+    public static void setTemp(double temp){
+        TEMP = temp;
+    }
+    public void calculateScale(){
+        SCALE = SCALE + ((TEMP - PREV_TEMP)/PREV_TEMP);
+        PREV_TEMP = TEMP;
+        
+    }
+    public void setPrevTemp(double prevTemp){
+        PREV_TEMP = prevTemp;
+    }
+    public static double getScale(){
         return SCALE;
     }
 }
