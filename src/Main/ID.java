@@ -13,6 +13,6 @@ package Main;
 public enum ID {
     Camera(),
     Player(),
-    Background();
-    
+    Background(),
+    Obstacle();
 }

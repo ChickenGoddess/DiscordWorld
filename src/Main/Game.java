@@ -43,6 +43,7 @@ public class Game extends Canvas implements Runnable{
     static int BACKGROUND_OFFSET_X;
     static int BACKGROUND_OFFSET_Y;
     Player player;
+    Obstacle fence;
     static Window window;
     private static double SCALE = 1.0000000000000000;
     private static double TEMP = HEIGHT;
@@ -53,13 +54,16 @@ public class Game extends Canvas implements Runnable{
         setBackgroundOffset(0, 0);
         window = new Window("Practice", WIDTH, HEIGHT, this);
         player = new Player(WIDTH/2, HEIGHT/2, ID.Player);
+        fence = new Obstacle(WIDTH/2, HEIGHT/2);
         spawnPlayer(400, 400);
+        setObstacle(70, 70, fence);
         handler = new Handler();
         this.addKeyListener(new KeyInput(handler));
         texture = new BackgroundTexture(BACKGROUND_OFFSET_X, BACKGROUND_OFFSET_Y, ID.Background);
         System.out.println(texture.getHeight());
         handler.addObj(texture);
         handler.addObj(player);
+        handler.addObj(fence);
         camera = new GameCamera(player);
         handler.setCamera(camera);
         handler.addObj(camera);
@@ -71,6 +75,11 @@ public class Game extends Canvas implements Runnable{
     void spawnPlayer(int x, int y){
         player.setX(x);
         player.setY(y);
+    }
+    
+    public void setObstacle(int x, int y, Obstacle obstacle){
+        obstacle.setX(x);
+        obstacle.setY(y);
     }
     
     void setBackgroundOffset(int x, int y){
