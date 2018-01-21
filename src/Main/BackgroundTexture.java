@@ -15,7 +15,7 @@ import java.io.FileReader;
  *
  * @author Chicken
  */
-public class BackgroundTexture extends OverworldObj{
+public class BackgroundTexture extends GameObj{
 
     private ImageLoader load = new ImageLoader();
     

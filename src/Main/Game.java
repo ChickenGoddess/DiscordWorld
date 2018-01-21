@@ -49,6 +49,7 @@ public class Game extends Canvas implements Runnable{
     private static double TEMP = HEIGHT;
     private static double PREV_TEMP = HEIGHT;
     private static BackgroundTexture texture;
+    KeyInput input;
     
     public Game(){
         setBackgroundOffset(0, 0);
@@ -58,7 +59,8 @@ public class Game extends Canvas implements Runnable{
         spawnPlayer(400, 400);
         setObstacle(70, 70, fence);
         handler = new Handler();
-        this.addKeyListener(new KeyInput(handler));
+        input = new KeyInput(handler);
+        this.addKeyListener(input);
         texture = new BackgroundTexture(BACKGROUND_OFFSET_X, BACKGROUND_OFFSET_Y, ID.Background);
         System.out.println(texture.getHeight());
         handler.addObj(texture);
@@ -232,6 +234,7 @@ public class Game extends Canvas implements Runnable{
                     PREV_TEMP = ORIGIN_HEIGHT * 3.5;
                 }
             }
+            input.moveCharacter();
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
                 System.out.println("FPS: " + frames);

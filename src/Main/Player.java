@@ -17,7 +17,7 @@ import java.util.ArrayList;
  *
  * @author Chicken
  */
-public class Player extends GameObj{
+public class Player extends OverworldObj{
     
     ImageLoader load = new ImageLoader();
     ArrayList<BufferedImage> sprites = new ArrayList<BufferedImage>();
