@@ -237,8 +237,8 @@ public class Handler {
     public void checkCollision(OverworldObj tempObj){
         for(OverworldObj item : items){
             item.collision(tempObj);
-            System.out.println("TempObj: " + tempObj.getName());
-            System.out.println("Item: " + item.getName());
+            //System.out.println("TempObj: " + tempObj.getName());
+            //System.out.println("Item: " + item.getName());
             //System.out.println("Ayyy");
         }
     }

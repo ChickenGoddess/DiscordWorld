@@ -57,7 +57,7 @@ public class Game extends Canvas implements Runnable{
         player = new Player(WIDTH/2, HEIGHT/2, ID.Player);
         fence = new Obstacle(WIDTH/2, HEIGHT/2, "Fence");
         spawnPlayer(400, 400);
-        setObstacle(70, 70, fence);
+        setObstacle(200, 200, fence);
         handler = new Handler();
         input = new KeyInput(handler);
         this.addKeyListener(input);
