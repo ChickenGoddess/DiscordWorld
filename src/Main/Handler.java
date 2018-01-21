@@ -161,8 +161,7 @@ public class Handler {
                 int xDelta = (int)((tempObj.getPosX() - this.camera.getPosX()));
                 int yDelta = (int)((tempObj.getPosY() - this.camera.getPosY()));
                 if(getChangeScaled() == true){
-                    tempObj.setHeight((int)(tempObj.getHeight() * Game.getScale()));
-                        tempObj.setWidth((int)(tempObj.getHeight() * Game.getScale()));
+                    
                     if(tempObj.getID() == ID.Background){
                         
                         if(BACKGROUND_WIDTH <= Game.WIDTH){
@@ -182,6 +181,8 @@ public class Handler {
                     
                     tempObj.setX((int)(tempObj.getUnscaledX() * Game.getScale()));
                     tempObj.setY((int)(tempObj.getUnscaledY() * Game.getScale()));
+                    
+                    //System.out.println(tempObj.getName() + ": " + tempObj.getHeight() + ", " + tempObj.getWidth());
                     //System.out.println(tempObj.getID() + ": " + tempObj.getPosX() + ", " + tempObj.getPosY());
                     count++;
                     if(object.size() == count){
@@ -191,6 +192,7 @@ public class Handler {
                     //System.out.println(count);
                     //System.out.println(object.size());
                 }
+                
                 g.drawImage(tempSprite, xDelta, yDelta, (int)(Game.getScale() * tempObj.getOriginWidth()), (int)(Game.getScale() * tempObj.getOriginHeight()), null);
             }
         }

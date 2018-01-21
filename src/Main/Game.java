@@ -65,7 +65,7 @@ public class Game extends Canvas implements Runnable{
         handler.addObj(texture);
         handler.addObj(player);
         //handler.addObj(fence);
-        handler.addOverObj(fence);
+        //handler.addOverObj(fence);
         handler.addOverObj(player);
         camera = new GameCamera(player);
         handler.setCamera(camera);
@@ -234,6 +234,10 @@ public class Game extends Canvas implements Runnable{
                     TEMP = ORIGIN_HEIGHT * 3.5;
                     
                 }
+                Game.getTexture().setWidth((int)(Game.getTexture().getOriginWidth() * Game.getScale()));
+                Game.getTexture().setHeight((int)(Game.getTexture().getOriginHeight() * Game.getScale()));
+                player.setWidth((int)(player.getOriginWidth() * SCALE));
+                player.setHeight((int)(player.getOriginHeight() * SCALE));
             }
             input.moveCharacter();
             if(System.currentTimeMillis() - timer > 1000){
@@ -243,6 +247,8 @@ public class Game extends Canvas implements Runnable{
                 System.out.println("PLAYER POSITION: " + player.getUnscaledX() + ", " + player.getUnscaledY());
                 System.out.println("CAMERA POSITION: " + camera.getUnscaledX() + ", " + camera.getUnscaledY());
                 System.out.println("TEXTURE POSITION: " + texture.getUnscaledX() + ", " + texture.getUnscaledY());
+                System.out.println("PLAYER WIDTH AND HEIGHT: " + player.getWidth() + ", " + player.getHeight());
+                System.out.println("TEXTURE WIDTH AND HEIGHT: " + texture.getWidth() + ", " + texture.getHeight());
                 frames = 0;
             }
             try {
