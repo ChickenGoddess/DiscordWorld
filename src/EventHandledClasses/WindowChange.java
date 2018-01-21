@@ -49,8 +49,10 @@ public class WindowChange extends JPanel{
             Handler.changeScaled(true);
             if(frame.getWidth() >= frame.getHeight()){
                 Game.setTemp(Game.getFrameHeight());
+                Game.setByHeight(true);
             } else{
                 Game.setTemp(Game.getFrameWidth());
+                Game.setByHeight(false);
             }
             if(Game.getTexture() != null){
                 Handler.setBackgroundWidth(Game.getTexture().getOriginWidth());

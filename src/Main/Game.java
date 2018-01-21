@@ -47,9 +47,9 @@ public class Game extends Canvas implements Runnable{
     static Window window;
     private static double SCALE = 1.0000000000000000;
     private static double TEMP = HEIGHT;
-    private static double PREV_TEMP = HEIGHT;
     private static BackgroundTexture texture;
     KeyInput input;
+    private static boolean BY_HEIGHT = true;
     
     public Game(){
         setBackgroundOffset(0, 0);
@@ -64,7 +64,7 @@ public class Game extends Canvas implements Runnable{
         texture = new BackgroundTexture(BACKGROUND_OFFSET_X, BACKGROUND_OFFSET_Y, "Background_1");
         handler.addObj(texture);
         handler.addObj(player);
-        handler.addObj(fence);
+        //handler.addObj(fence);
         handler.addOverObj(fence);
         handler.addOverObj(player);
         camera = new GameCamera(player);
@@ -133,106 +133,106 @@ public class Game extends Canvas implements Runnable{
             }
             frames++;
             if(System.currentTimeMillis() - timer > 100){
-                calculateScale();
+                calculateScale(BY_HEIGHT);
                 if(HEIGHT == ORIGIN_HEIGHT){
                     SCALE = 1.0;
                 }
                 if(HEIGHT >= WIDTH && WIDTH == ORIGIN_WIDTH){
                     SCALE = 1 + (ORIGIN_WIDTH - ORIGIN_HEIGHT)/(double)ORIGIN_HEIGHT;
                     TEMP = WIDTH;
-                    PREV_TEMP = WIDTH;
+                    
                 }
                 if(WIDTH >= HEIGHT && HEIGHT == ORIGIN_HEIGHT*2){
                     SCALE = 2.0;
                     TEMP = ORIGIN_HEIGHT * 2;
-                    PREV_TEMP = ORIGIN_HEIGHT * 2;
+                    
                 }
                 if(HEIGHT >= WIDTH && WIDTH == ORIGIN_HEIGHT * 2){
                     SCALE = 2.0;
                     TEMP = ORIGIN_HEIGHT * 2;
-                    PREV_TEMP = ORIGIN_HEIGHT * 2;
+                    
                 }
                 if(WIDTH >= HEIGHT && (double) HEIGHT == (double)ORIGIN_HEIGHT*1.5){
                     SCALE = 1.5;
                     //System.out.println("SCALE @4: " + SCALE);
                     TEMP = ORIGIN_HEIGHT * 1.5;
-                    PREV_TEMP = ORIGIN_HEIGHT * 1.5;
+                    
                     //System.out.println("SCALE AFTER 4: " + SCALE);
                 }
                 if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 1.5){
                     SCALE = 1.5;
                     TEMP = ORIGIN_HEIGHT * 1.5;
-                    PREV_TEMP = ORIGIN_HEIGHT * 1.5;
+                    
                 }
                 if(WIDTH >= HEIGHT && (double)HEIGHT == (double)ORIGIN_HEIGHT*1.25){
                     SCALE = 1.25;
                     TEMP = ORIGIN_HEIGHT * 1.25;
-                    PREV_TEMP = ORIGIN_HEIGHT * 1.25;
+                    
                 }
                 if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 1.25){
                     SCALE = 1.25;
                     TEMP = ORIGIN_HEIGHT * 1.25;
-                    PREV_TEMP = ORIGIN_HEIGHT * 1.25;
+                    
                 }
                 if(WIDTH >= HEIGHT && (double)WIDTH == (double)ORIGIN_HEIGHT*1.75){
                     SCALE = 1.75;
                     TEMP = ORIGIN_HEIGHT * 1.75;
-                    PREV_TEMP = ORIGIN_HEIGHT * 1.75;
+                    
                 }
                 if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 1.75){
                     SCALE = 3;
                     TEMP = ORIGIN_HEIGHT * 3;
-                    PREV_TEMP = ORIGIN_HEIGHT * 3;
+                    
                 }
                 if(WIDTH >= HEIGHT && (double)WIDTH == (double)ORIGIN_HEIGHT*3){
                     SCALE = 3;
                     TEMP = ORIGIN_HEIGHT * 3;
-                    PREV_TEMP = ORIGIN_HEIGHT * 3;
+                    
                 }
                 if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 3){
                     SCALE = 3;
                     TEMP = ORIGIN_HEIGHT * 3;
-                    PREV_TEMP = ORIGIN_HEIGHT * 3;
+                    
                 }
                 if(WIDTH >= HEIGHT && (double)WIDTH == (double)ORIGIN_HEIGHT*4){
                     SCALE = 4;
                     TEMP = ORIGIN_HEIGHT * 4;
-                    PREV_TEMP = ORIGIN_HEIGHT * 4;
+                    
                 }
                 if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 4){
                     SCALE = 4;
                     TEMP = ORIGIN_HEIGHT * 4;
-                    PREV_TEMP = ORIGIN_HEIGHT * 4;
+                    
                 }
                 if(WIDTH >= HEIGHT && (double)WIDTH == (double)ORIGIN_HEIGHT*5){
                     SCALE = 5;
                     TEMP = ORIGIN_HEIGHT * 5;
-                    PREV_TEMP = ORIGIN_HEIGHT * 5;
+                    
                 }
                 if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 5){
                     SCALE = 5;
                     TEMP = ORIGIN_HEIGHT * 5;
-                    PREV_TEMP = ORIGIN_HEIGHT * 5;
+                    
                 }
                 if(WIDTH >= HEIGHT && (double)WIDTH == (double)ORIGIN_HEIGHT*2.5){
                     SCALE = 2.5;
                     TEMP = ORIGIN_HEIGHT * 2.5;
-                    PREV_TEMP = ORIGIN_HEIGHT * 2.5;
+                    
                 }
                 if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 2.5){
                     SCALE = 2.5;
                     TEMP = ORIGIN_HEIGHT * 2.5;
-                    PREV_TEMP = ORIGIN_HEIGHT * 2.5;
+                    
                 }
                 if(WIDTH >= HEIGHT && (double)WIDTH == (double)ORIGIN_HEIGHT*3.5){
                     SCALE = 3.5;
                     TEMP = ORIGIN_HEIGHT * 3.5;
-                    PREV_TEMP = ORIGIN_HEIGHT * 3.5;
+                    
                 }
                 if(HEIGHT >= WIDTH && (double)WIDTH == (double)ORIGIN_HEIGHT * 3.5){
                     SCALE = 3.5;
                     TEMP = ORIGIN_HEIGHT * 3.5;
-                    PREV_TEMP = ORIGIN_HEIGHT * 3.5;
+                    
                 }
             }
             input.moveCharacter();
@@ -240,6 +240,9 @@ public class Game extends Canvas implements Runnable{
                 timer += 1000;
                 System.out.println("FPS: " + frames);
                 System.out.println("SCALE: " + SCALE);
+                System.out.println("PLAYER POSITION: " + player.getUnscaledX() + ", " + player.getUnscaledY());
+                System.out.println("CAMERA POSITION: " + camera.getUnscaledX() + ", " + camera.getUnscaledY());
+                System.out.println("TEXTURE POSITION: " + texture.getUnscaledX() + ", " + texture.getUnscaledY());
                 frames = 0;
             }
             try {
@@ -332,13 +335,18 @@ public class Game extends Canvas implements Runnable{
     public static void setTemp(double temp){
         TEMP = temp;
     }
-    public void calculateScale(){
-        SCALE = SCALE + ((TEMP - PREV_TEMP)/PREV_TEMP);
-        PREV_TEMP = TEMP;
+    public void calculateScale(boolean byHeight){
+        //SCALE = SCALE + ((TEMP - PREV_TEMP)/PREV_TEMP);
+        //PREV_TEMP = TEMP;
+        if(byHeight){
+            SCALE = 1 + (TEMP - ORIGIN_HEIGHT)/ORIGIN_HEIGHT;
+        } else{
+            SCALE = 1 + (TEMP - ORIGIN_WIDTH)/ORIGIN_WIDTH;
+        }
         
     }
-    public void setPrevTemp(double prevTemp){
-        PREV_TEMP = prevTemp;
+    public static void setByHeight(boolean byHeight){
+        BY_HEIGHT = byHeight;
     }
     public static double getScale(){
         return SCALE;

@@ -161,9 +161,10 @@ public class Handler {
                 int xDelta = (int)((tempObj.getPosX() - this.camera.getPosX()));
                 int yDelta = (int)((tempObj.getPosY() - this.camera.getPosY()));
                 if(getChangeScaled() == true){
-                    if(tempObj.getID() == ID.Background){
-                        tempObj.setHeight((int)(tempObj.getHeight() * Game.getScale()));
+                    tempObj.setHeight((int)(tempObj.getHeight() * Game.getScale()));
                         tempObj.setWidth((int)(tempObj.getHeight() * Game.getScale()));
+                    if(tempObj.getID() == ID.Background){
+                        
                         if(BACKGROUND_WIDTH <= Game.WIDTH){
                             largerX = true;
                         }
