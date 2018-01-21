@@ -43,7 +43,7 @@ public class BackgroundTexture extends OverworldObj{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(this.getSprite(), x, y, (int)(width * Game.getScale()), (int)(height * Game.getScale()), null);
+        //g.drawImage(this.getSprite(), x, y, (int)(width * Game.getScale()), (int)(height * Game.getScale()), null);
     }
 }
 

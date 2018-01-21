@@ -35,15 +35,18 @@ public class Player extends GameObj{
         origin_height = height;
         sprites.add(louder);
         this.setSprite(louder);
+        unscaledX = x;
+        unscaledY = y;
     }
 
     @Override
     public void tick() {
-        x += velX;
-        y += velY;        
-        
-        //x = Game.clamp(x, Game.BACKGROUND_OFFSET_X, Game.CURRENTTEXTURE.sprite.getWidth() + Game.BACKGROUND_OFFSET_X - width);
-        //y = Game.clamp(y, Game.BACKGROUND_OFFSET_Y, Game.CURRENTTEXTURE.sprite.getHeight() + Game.BACKGROUND_OFFSET_Y - height);
+        x += (velX * Game.getScale());
+        y += (velY * Game.getScale());
+        unscaledX += velX;
+        unscaledY += velY;
+        x = Game.clamp(x, Game.BACKGROUND_OFFSET_X, (int)((Game.CURRENTTEXTURE.sprite.getWidth() + Game.BACKGROUND_OFFSET_X - width)*Game.getScale()));
+        y = Game.clamp(y, Game.BACKGROUND_OFFSET_Y, (int)((Game.CURRENTTEXTURE.sprite.getHeight() + Game.BACKGROUND_OFFSET_Y - height)*Game.getScale()));
     }
 
     @Override

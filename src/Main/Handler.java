@@ -17,7 +17,7 @@ import java.awt.image.BufferedImage;
  */
 public class Handler {
     
-    LinkedList<GameObj> object = new LinkedList<>();
+    public static LinkedList<GameObj> object = new LinkedList<>();
     private GameCamera camera;
     private boolean initialized = false;
     private static int BACKGROUND_HEIGHT = 0;
@@ -33,7 +33,7 @@ public class Handler {
             
             tempObj.init();
             if(tempObj.getID() == ID.Background){
-                System.out.println(tempObj.getHeight());
+                //System.out.println(tempObj.getHeight());
                 BACKGROUND_HEIGHT = tempObj.getHeight();
                 BACKGROUND_WIDTH = tempObj.getWidth();
             }
@@ -62,8 +62,9 @@ public class Handler {
             GameObj tempObj = object.get(i);
             tempObj.render(g);
         }*/
-
+        int count = 1;
         for (GameObj tempObj : object) {
+            
             BufferedImage tempSprite = tempObj.getSprite();
             if (tempSprite != null) {
                 
@@ -71,7 +72,8 @@ public class Handler {
                     if(freeCam = true){
                         this.camera.setFollowing(true, true);
                     }
-                    /*
+                    //System.out.println(BACKGROUND_WIDTH);
+                    //System.out.println(tempObj.getPosX());
                     if(largerX == false && largerY == false){
                         if(tempObj.getPosX() <= Game.WIDTH/2 + Game.BACKGROUND_OFFSET_X - camera.getTarget().getWidth()/2){
                             this.camera.setFollowX(false);
@@ -83,15 +85,15 @@ public class Handler {
                             this.camera.setY(0);
                             done = false;
                             freeCam = false;
-                        } if(tempObj.getPosX() >= BACKGROUND_WIDTH - Game.WIDTH/2 + Game.BACKGROUND_OFFSET_X - camera.getTarget().getWidth()/2){
+                        } if(tempObj.getPosX() >= BACKGROUND_WIDTH - Game.WIDTH/2 + Game.BACKGROUND_OFFSET_X - (camera.getTarget().getWidth()*Game.getScale())/2 + 10 * Game.getScale()){
                             this.camera.setFollowX(false);
-                            this.camera.setX(BACKGROUND_WIDTH - Game.WIDTH);
+                            this.camera.setX(BACKGROUND_WIDTH - Game.WIDTH + (int)(6 * Game.getScale()));
                             done = false;
                             freeCam = false;
 
-                        } if(tempObj.getPosY() >= BACKGROUND_HEIGHT - Game.HEIGHT/2 + Game.BACKGROUND_OFFSET_Y - 6){
+                        } if(tempObj.getPosY() >= BACKGROUND_HEIGHT - Game.HEIGHT/2 + Game.BACKGROUND_OFFSET_Y){
                             this.camera.setFollowY(false);
-                            this.camera.setY(BACKGROUND_HEIGHT - Game.HEIGHT + camera.getTarget().getHeight()/2 - 6);
+                            this.camera.setY(BACKGROUND_HEIGHT - Game.HEIGHT + camera.getTarget().getHeight()/2);
                             done = false;
                             freeCam = false;
                         } 
@@ -125,7 +127,7 @@ public class Handler {
                         if(freeCam = true){
                             this.camera.setFollowing(true, false);
                         }
-                        if(tempObj.getPosX() <= Game.WIDTH/2 + Game.BACKGROUND_OFFSET_X - camera.getTarget().getWidth()/2){
+                        if(tempObj.getPosX() <= Game.WIDTH/2 + Game.BACKGROUND_OFFSET_X - (camera.getTarget().getWidth()*Game.getScale())/2){
                             this.camera.setFollowX(false);
                             this.camera.setX(0);
                             done = false;
@@ -135,7 +137,7 @@ public class Handler {
                             freeCam = true;
                         }
                         done = true;
-                        if(tempObj.getPosX() >= BACKGROUND_WIDTH - Game.WIDTH/2 + Game.BACKGROUND_OFFSET_X - camera.getTarget().getWidth()/2){
+                        if(tempObj.getPosX() >= BACKGROUND_WIDTH - Game.WIDTH/2 + Game.BACKGROUND_OFFSET_X - (camera.getTarget().getWidth()*Game.getScale())/2){
                             this.camera.setFollowX(false);
                             this.camera.setX(BACKGROUND_WIDTH - Game.WIDTH);
                             done = false;
@@ -148,15 +150,28 @@ public class Handler {
                         this.camera.setX(BACKGROUND_WIDTH/2 - Game.WIDTH/2);
                         this.camera.setY(BACKGROUND_HEIGHT/2 - Game.HEIGHT/2 + 18);
                     }
-*/
+
                 }
 
-                int xDelta = tempObj.getPosX() - this.camera.getPosX();
-                int yDelta = tempObj.getPosY() - this.camera.getPosY();
+                int xDelta = (int)((tempObj.getPosX() - this.camera.getPosX()));
+                int yDelta = (int)((tempObj.getPosY() - this.camera.getPosY()));
                 if(getChangeScaled() == true){
-                    changeScaled(false);
-                    tempObj.setHeight((int)(tempObj.getHeight() * Game.getScale()));
-                    tempObj.setWidth((int)(tempObj.getHeight() * Game.getScale()));
+                    if(tempObj.getID() == ID.Background){
+                        tempObj.setHeight((int)(tempObj.getHeight() * Game.getScale()));
+                        tempObj.setWidth((int)(tempObj.getHeight() * Game.getScale()));
+                        //System.out.println(tempObj.getID());
+                    }
+                    
+                    tempObj.setX((int)(tempObj.getUnscaledX() * Game.getScale()));
+                    tempObj.setY((int)(tempObj.getUnscaledY() * Game.getScale()));
+                    //System.out.println(tempObj.getID() + ": " + tempObj.getPosX() + ", " + tempObj.getPosY());
+                    count++;
+                    if(object.size() == count){
+                        changeScaled(false);
+                        count = 1;
+                    }
+                    //System.out.println(count);
+                    //System.out.println(object.size());
                 }
                 g.drawImage(tempSprite, xDelta, yDelta, (int)(Game.getScale() * tempObj.getOriginWidth()), (int)(Game.getScale() * tempObj.getOriginHeight()), null);
             }
@@ -179,5 +194,19 @@ public class Handler {
     }
     public boolean getChangeScaled(){
         return changedScale;
+    }
+    public static void setScaledLocation(){
+        for(GameObj tempObj : object){
+            
+            tempObj.setX((int)(tempObj.getPosX() * Game.getScale()));
+            tempObj.setY((int)(tempObj.getPosY() * Game.getScale()));
+            
+        }
+    }
+    public static void setBackgroundWidth(int width){
+        BACKGROUND_WIDTH = (int)(width * Game.getScale());
+    }
+    public static void setBackgroundHeight(int height){
+        BACKGROUND_HEIGHT = (int)(height * Game.getScale());
     }
 }

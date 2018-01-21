@@ -47,6 +47,7 @@ public class Game extends Canvas implements Runnable{
     private static double SCALE = 1.0000000000000000;
     private static double TEMP = HEIGHT;
     private static double PREV_TEMP = HEIGHT;
+    private static BackgroundTexture texture;
     
     public Game(){
         setBackgroundOffset(0, 0);
@@ -55,7 +56,7 @@ public class Game extends Canvas implements Runnable{
         spawnPlayer(400, 400);
         handler = new Handler();
         this.addKeyListener(new KeyInput(handler));
-        BackgroundTexture texture = new BackgroundTexture(BACKGROUND_OFFSET_X, BACKGROUND_OFFSET_Y, ID.Background);
+        texture = new BackgroundTexture(BACKGROUND_OFFSET_X, BACKGROUND_OFFSET_Y, ID.Background);
         System.out.println(texture.getHeight());
         handler.addObj(texture);
         handler.addObj(player);
@@ -328,5 +329,8 @@ public class Game extends Canvas implements Runnable{
     }
     public static double getScale(){
         return SCALE;
+    }
+    public static BackgroundTexture getTexture(){
+        return texture;
     }
 }

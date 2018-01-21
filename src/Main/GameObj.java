@@ -26,6 +26,8 @@ public abstract class GameObj {
     protected int width;
     protected int origin_width;
     protected int origin_height;
+    protected int unscaledX;
+    protected int unscaledY;
     
     public GameObj(int x, int y, ID id){
         this.x = x;
@@ -101,5 +103,11 @@ public abstract class GameObj {
     }
     public void setHeight(int height){
         this.height = height;
+    }
+    public int getUnscaledX(){
+        return unscaledX;
+    }
+    public int getUnscaledY(){
+        return unscaledY;
     }
 }
