@@ -18,11 +18,11 @@ public class GameCamera extends GameObj {
     private boolean followY;
     
     public GameCamera(int x, int y){
-        super(x, y, ID.Camera);
+        super(x, y, ID.Camera, "Camera");
     }
 
     public GameCamera(GameObj target, boolean following) {
-        super(0, 0, ID.Camera);
+        super(0, 0, ID.Camera, "Camera");
         this.target = target;
         this.followX = following;
         this.followY = following;

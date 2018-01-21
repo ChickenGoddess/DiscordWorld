@@ -28,14 +28,16 @@ public abstract class GameObj {
     protected int origin_height;
     protected int unscaledX;
     protected int unscaledY;
+    protected String name;
     
-    public GameObj(int x, int y, ID id){
+    public GameObj(int x, int y, ID id, String name){
         this.x = x;
         this.y = y;
         this.id = id;
         sprite = null;
         height = 0;
         width = 0;
+        this.name = name;
     }
     
     public abstract void init();
@@ -109,5 +111,12 @@ public abstract class GameObj {
     }
     public int getUnscaledY(){
         return unscaledY;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    
+    public String getName(){
+        return name;
     }
 }

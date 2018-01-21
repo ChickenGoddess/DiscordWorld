@@ -16,8 +16,8 @@ public class Obstacle extends OverworldObj{
 
     ImageLoader load = new ImageLoader();
     
-    public Obstacle(int x, int y) {
-        super(x, y, ID.Obstacle);
+    public Obstacle(int x, int y, String name) {
+        super(x, y, ID.Obstacle, name);
     }
 
     @Override

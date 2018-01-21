@@ -4,6 +4,7 @@ package Main;
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,7 +18,8 @@ import java.awt.image.BufferedImage;
  */
 public class Handler {
     
-    public static LinkedList<GameObj> object = new LinkedList<>();
+    public static List<GameObj> object = new LinkedList<>();
+    public static List<OverworldObj> items = new LinkedList<>();
     private GameCamera camera;
     private boolean initialized = false;
     private static int BACKGROUND_HEIGHT = 0;
@@ -63,8 +65,11 @@ public class Handler {
             tempObj.render(g);
         }*/
         int count = 1;
+        for(OverworldObj tempObj : items){
+            this.checkCollision(tempObj);
+        }
         for (GameObj tempObj : object) {
-            
+            //System.out.println(tempObj.getName());
             BufferedImage tempSprite = tempObj.getSprite();
             if (tempSprite != null) {
                 
@@ -159,6 +164,18 @@ public class Handler {
                     if(tempObj.getID() == ID.Background){
                         tempObj.setHeight((int)(tempObj.getHeight() * Game.getScale()));
                         tempObj.setWidth((int)(tempObj.getHeight() * Game.getScale()));
+                        if(BACKGROUND_WIDTH <= Game.WIDTH){
+                            largerX = true;
+                        }
+                        if(BACKGROUND_HEIGHT <= Game.HEIGHT - 18){
+                            largerY = true;
+                        }
+                        if(BACKGROUND_WIDTH > Game.WIDTH){
+                            largerX = false;
+                        }
+                        if(BACKGROUND_HEIGHT > Game.HEIGHT){
+                            largerY = false;
+                        }
                         //System.out.println(tempObj.getID());
                     }
                     
@@ -186,6 +203,14 @@ public class Handler {
         object.remove(obj);
     }
     
+    public void addOverObj(OverworldObj obj){
+        items.add(obj);
+    }
+    
+    public void removeOverObj(OverworldObj obj){
+        items.remove(obj);
+    }
+    
     public void setCamera(GameCamera camera) {
         this.camera = camera;
     }
@@ -208,5 +233,13 @@ public class Handler {
     }
     public static void setBackgroundHeight(int height){
         BACKGROUND_HEIGHT = (int)(height * Game.getScale());
+    }
+    public void checkCollision(OverworldObj tempObj){
+        for(OverworldObj item : items){
+            item.collision(tempObj);
+            System.out.println("TempObj: " + tempObj.getName());
+            System.out.println("Item: " + item.getName());
+            //System.out.println("Ayyy");
+        }
     }
 }

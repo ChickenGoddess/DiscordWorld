@@ -23,7 +23,7 @@ public class Player extends OverworldObj{
     ArrayList<BufferedImage> sprites = new ArrayList<BufferedImage>();
 
     public Player(int x, int y, ID id) {
-        super(x, y, id);
+        super(x, y, id, "Player");
     }
 
     @Override

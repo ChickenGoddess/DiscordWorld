@@ -21,8 +21,8 @@ public class BackgroundTexture extends GameObj{
     
     private boolean atSide = false;
     
-    public BackgroundTexture(int x, int y, ID id) {
-        super(x, y, id);
+    public BackgroundTexture(int x, int y, String name) {
+        super(x, y, ID.Background, name);
     }
 
     @Override

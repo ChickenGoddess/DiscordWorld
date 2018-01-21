@@ -12,8 +12,10 @@ package Main;
  */
 public abstract class OverworldObj extends GameObj{
     
-    public OverworldObj(int x, int y, ID id) {
-        super(x, y, id);
+    private String name;
+    
+    public OverworldObj(int x, int y, ID id, String name) {
+        super(x, y, id, name);
     }
     
     public void collision(OverworldObj object){
@@ -23,7 +25,11 @@ public abstract class OverworldObj extends GameObj{
                 (this.getPosY() + this.getOriginHeight()) * Game.getScale() >= object.getPosY()){
             this.setVelX(0);
             this.setVelY(0);
+            //System.out.println(this.getPosX() + "/ " + object.getPosX() + "/ " + object.getOriginWidth());
+            //System.out.println("Stuff");
         }
     }
+    
+    
     
 }
