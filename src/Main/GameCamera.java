@@ -28,6 +28,8 @@ public class GameCamera extends GameObj {
         this.followY = following;
         height = Game.HEIGHT;
         width = Game.WIDTH;
+        origin_width = width;
+        origin_height = height;
     }
 
     public GameCamera(GameObj target) {

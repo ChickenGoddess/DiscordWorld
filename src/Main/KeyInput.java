@@ -19,7 +19,7 @@ import java.util.Set;
 public class KeyInput extends KeyAdapter{
     
     private Handler handler;
-    private int playerVel = 5;
+    private int playerVel = 15;
     private final Set<Integer> pressed = new HashSet<Integer>();
     private boolean dir1 = false;
     private boolean dir2 = false;
@@ -146,9 +146,9 @@ public class KeyInput extends KeyAdapter{
             GameObj tempObj = handler.object.get(i);
             if(tempObj.getID() == ID.Player){
                 if(running){
-                    playerVel = 10;
+                    playerVel = 30;
                 } else{
-                    playerVel = 5;
+                    playerVel = 15;
                 }
                 if(dir1){
                     tempObj.setVelY(-playerVel);

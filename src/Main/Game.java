@@ -245,7 +245,7 @@ public class Game extends Canvas implements Runnable{
                 System.out.println("FPS: " + frames);
                 System.out.println("SCALE: " + SCALE);
                 System.out.println("PLAYER POSITION: " + player.getUnscaledX() + ", " + player.getUnscaledY());
-                System.out.println("CAMERA POSITION: " + camera.getUnscaledX() + ", " + camera.getUnscaledY());
+                System.out.println("CAMERA POSITION: " + camera.getPosX() + ", " + camera.getPosY());
                 System.out.println("TEXTURE POSITION: " + texture.getUnscaledX() + ", " + texture.getUnscaledY());
                 System.out.println("PLAYER WIDTH AND HEIGHT: " + player.getWidth() + ", " + player.getHeight());
                 System.out.println("TEXTURE WIDTH AND HEIGHT: " + texture.getWidth() + ", " + texture.getHeight());
