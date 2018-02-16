@@ -116,6 +116,13 @@ public abstract class GameObj {
         this.name = name;
     }
     
+    public void setUnscaledX(int x){
+        this.unscaledX = x;
+    }
+    public void setUnscaledY(int y){
+        this.unscaledY = y;
+    }
+    
     public String getName(){
         return name;
     }

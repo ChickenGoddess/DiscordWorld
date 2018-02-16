@@ -78,6 +78,8 @@ public class Game extends Canvas implements Runnable{
     void spawnPlayer(int x, int y){
         player.setX(x);
         player.setY(y);
+        player.setUnscaledX(x);
+        player.setUnscaledY(y);
     }
     
     public void setObstacle(int x, int y, Obstacle obstacle){
@@ -133,15 +135,17 @@ public class Game extends Canvas implements Runnable{
             }
             frames++;
             if(System.currentTimeMillis() - timer > 100){
-                calculateScale(BY_HEIGHT);
+                
                 if(HEIGHT == ORIGIN_HEIGHT){
                     SCALE = 1.0;
                 }
+                
                 if(HEIGHT >= WIDTH && WIDTH == ORIGIN_WIDTH){
                     SCALE = 1 + (ORIGIN_WIDTH - ORIGIN_HEIGHT)/(double)ORIGIN_HEIGHT;
                     TEMP = WIDTH;
                     
                 }
+                
                 if(WIDTH >= HEIGHT && HEIGHT == ORIGIN_HEIGHT*2){
                     SCALE = 2.0;
                     TEMP = ORIGIN_HEIGHT * 2;
@@ -242,13 +246,16 @@ public class Game extends Canvas implements Runnable{
             input.moveCharacter();
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
+                /*
                 System.out.println("FPS: " + frames);
                 System.out.println("SCALE: " + SCALE);
                 System.out.println("PLAYER POSITION: " + player.getUnscaledX() + ", " + player.getUnscaledY());
-                System.out.println("CAMERA POSITION: " + camera.getPosX() + ", " + camera.getPosY());
+                System.out.println("PLAYER ACTUAL POSITION: " + player.getPosX() + ", " + player.getPosY());
+                System.out.println("CAMERA POSITION: " + camera.getUnscaledX() + ", " + camera.getUnscaledY());
                 System.out.println("TEXTURE POSITION: " + texture.getUnscaledX() + ", " + texture.getUnscaledY());
                 System.out.println("PLAYER WIDTH AND HEIGHT: " + player.getWidth() + ", " + player.getHeight());
                 System.out.println("TEXTURE WIDTH AND HEIGHT: " + texture.getWidth() + ", " + texture.getHeight());
+                */
                 frames = 0;
             }
             try {
@@ -341,7 +348,7 @@ public class Game extends Canvas implements Runnable{
     public static void setTemp(double temp){
         TEMP = temp;
     }
-    public void calculateScale(boolean byHeight){
+    public static void calculateScale(boolean byHeight){
         //SCALE = SCALE + ((TEMP - PREV_TEMP)/PREV_TEMP);
         //PREV_TEMP = TEMP;
         if(byHeight){
@@ -353,6 +360,9 @@ public class Game extends Canvas implements Runnable{
     }
     public static void setByHeight(boolean byHeight){
         BY_HEIGHT = byHeight;
+    }
+    public static boolean getByHeight(){
+        return BY_HEIGHT;
     }
     public static double getScale(){
         return SCALE;
