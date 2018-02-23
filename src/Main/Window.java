@@ -18,10 +18,10 @@ import javax.swing.JFrame;
  */
 public class Window extends Canvas{
     
-    
+    private static JFrame frame;
     
     public Window(String title, int height, int width, Game game){
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         WindowChange changer = new WindowChange(frame);
         frame.setPreferredSize(new Dimension(height, width));
         frame.add(changer);
@@ -35,6 +35,10 @@ public class Window extends Canvas{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         game.start();
+    }
+    
+    public static JFrame getFrame(){
+        return frame;
     }
     
 }

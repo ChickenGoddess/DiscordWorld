@@ -26,8 +26,6 @@ public class Game extends Canvas implements Runnable{
     BufferedImage bi;
     ImageLoader load = new ImageLoader();
     
-    
-    
     private boolean running = false;
     private Thread thread;
     static int ORIGIN_WIDTH = 620;
@@ -50,6 +48,8 @@ public class Game extends Canvas implements Runnable{
     private static BackgroundTexture texture;
     KeyInput input;
     private static boolean BY_HEIGHT = true;
+    private static int noBorderWidth = 0;
+    private static int noBorderHeight = 0;
     
     public Game(){
         setBackgroundOffset(0, 0);
@@ -369,5 +369,17 @@ public class Game extends Canvas implements Runnable{
     }
     public static BackgroundTexture getTexture(){
         return texture;
+    }
+    public static void setNoBorderWidth(int width){
+        noBorderWidth = width;
+    }
+    public static void setNoBorderHeight(int height){
+        noBorderHeight = height;
+    }
+    public static int getNoBorderWidth(){
+        return noBorderWidth;
+    }
+    public static int getNoBorderHeight(){
+        return noBorderHeight;
     }
 }
