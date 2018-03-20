@@ -37,11 +37,13 @@ public class KeyInput extends KeyAdapter{
         pressed.add(e.getKeyCode());
         
         
-        for(int i = 0; i < handler.object.size(); i++){
-            GameObj tempObj = handler.object.get(i);
+        for(int i = 0; i < handler.items.size(); i++){
+            OverworldObj tempObj = handler.items.get(i);
+            tempObj.prevPoint(tempObj.getPosX(), tempObj.getPosY());
             if(tempObj.getID() == ID.Player){
                 if(pressed.size() >= 1){
                     for(int key : pressed){
+                        
                         if(key == KeyEvent.VK_W || key == KeyEvent.VK_UP){
                             dir1 = true;
                         }
@@ -61,6 +63,10 @@ public class KeyInput extends KeyAdapter{
                         if(!pressed.contains(KeyEvent.VK_SHIFT)){
                             running = false;
                         }
+                       // System.out.println(tempObj.getCollided());
+                        //System.out.println(tempObj.getTriangle());
+                        
+                        
                     }
                 }
             }
@@ -95,8 +101,8 @@ public class KeyInput extends KeyAdapter{
         
         int key = e.getKeyCode();
         
-        for(int i = 0; i < handler.object.size(); i++){
-            GameObj tempObj = handler.object.get(i);
+        for(int i = 0; i < handler.items.size(); i++){
+            OverworldObj tempObj = handler.items.get(i);
             if(tempObj.getID() == ID.Player){
                 if(pressed.size() >= 1){
                     
@@ -142,24 +148,54 @@ public class KeyInput extends KeyAdapter{
     }
     
     public void moveCharacter(){
-        for(int i = 0; i < handler.object.size(); i++){
-            GameObj tempObj = handler.object.get(i);
+        for(int i = 0; i < handler.items.size(); i++){
+            OverworldObj tempObj = handler.items.get(i);
+            //tempObj.setPrevY(tempObj.getPosY());
             if(tempObj.getID() == ID.Player){
+                //System.out.println("x: " + tempObj.getPosX());
+                //System.out.println("y: " + tempObj.getPosY());
                 if(running){
-                    playerVel = 50;
+                    playerVel = 20;
                 } else{
-                    playerVel = 1;
+                    playerVel = 2;
                 }
+                if(tempObj.getTriangle() == 1 && tempObj.getCollided() == true){
+                    dir2 = false;
+                    //System.out.println(tempObj.getPrevY());
+                    tempObj.setY(tempObj.getPrevY());
+                    //System.out.println("1");
+                }
+                if(tempObj.getTriangle() == 2 && tempObj.getCollided() == true){
+                    dir3 = false;
+                    tempObj.setX(tempObj.getPrevX());
+                    //System.out.println("2");
+                }
+                if(tempObj.getTriangle() == 3 && tempObj.getCollided() == true){
+                    dir1 = false;
+                    //System.out.println(tempObj.getPrevY());
+                    tempObj.setY(tempObj.getPrevY());
+                    //System.out.println("3");
+                }
+                if(tempObj.getTriangle() == 4 && tempObj.getCollided() == true){
+                    dir4 = false;
+                    tempObj.setX(tempObj.getPrevX());
+                    //System.out.println("4");
+                }
+                //System.out.println("Collided: " + tempObj.getCollided());
                 if(dir1){
+                    //System.out.println("What? 1");
                     tempObj.setVelY(-playerVel);
                 }
                 if(dir2){
+                    //System.out.println("What? 2");
                     tempObj.setVelY(playerVel);
                 }
                 if(dir3){
+                    //System.out.println("What? 3");
                     tempObj.setVelX(-playerVel);
                 }
                 if(dir4){
+                    //System.out.println("What? 4");
                     tempObj.setVelX(playerVel);
                 }
                 if(!dir1 && !dir2){

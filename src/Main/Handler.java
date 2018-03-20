@@ -31,6 +31,12 @@ public class Handler {
     private boolean largerY = false;
     private static boolean changedScale = false;
     
+    private static Handler HANDLER = new Handler();
+    
+    public static Handler instance(){
+        return HANDLER;
+    }
+    
     public void init() {
         for (GameObj tempObj : object) {
             
@@ -84,6 +90,7 @@ public class Handler {
                     
                     
                     if(largerX == false && largerY == false){
+                        /*
                         System.out.println("Game width/height: " + Game.WIDTH + ", " + Game.HEIGHT);
                         System.out.println("Background width/height: " + BACKGROUND_WIDTH + ", " + BACKGROUND_HEIGHT);
                         System.out.println("Sprite width/height: " + camera.getTarget().getWidth() + ", " + camera.getTarget().getHeight());
@@ -93,7 +100,7 @@ public class Handler {
                         System.out.println("No Border Width/Height: " + Game.getNoBorderWidth() + ", " + Game.getNoBorderHeight());
                         System.out.println("tempObj.getPosX() + tempObj.getWidth()/2: " + (tempObj.getPosX() + tempObj.getWidth()/2));
                         System.out.println("Game.getTexture().getSprite().getWidth() - Game.getNoBorderHeight() + Game.BACKGROUND_OFFSET_X: " + (Game.getTexture().getSprite().getWidth() - Game.getFrameWidth()/2 + Game.BACKGROUND_OFFSET_X));
-                        
+                        */
                         if(tempObj.getUnscaledX()<= Game.ORIGIN_WIDTH/2 + Game.BACKGROUND_OFFSET_X - camera.getTarget().getOriginWidth()/2){
                             this.camera.setFollowX(false);
                             this.camera.setX(0);
@@ -104,7 +111,7 @@ public class Handler {
                             this.camera.setY(0);
                             done = false;
                             freeCam = false;
-                        } if(tempObj.getPosX() + tempObj.getWidth()/2 - 9>= BACKGROUND_WIDTH - Game.getNoBorderWidth()/2 + Game.BACKGROUND_OFFSET_X){
+                        } if(tempObj.getPosX() + tempObj.getWidth()/2 - 9 >= BACKGROUND_WIDTH - Game.getNoBorderWidth()/2 + Game.BACKGROUND_OFFSET_X){
                             this.camera.setFollowX(false);
                             this.camera.setX(BACKGROUND_WIDTH - Game.getNoBorderWidth());
                             done = false;
@@ -210,6 +217,9 @@ public class Handler {
                     //System.out.println(object.size());
                 }
                 
+                tempObj.setActX(tempObj.getUnscaledX() + tempObj.getOriginWidth()/2);
+                tempObj.setActY(tempObj.getUnscaledY() + tempObj.getOriginHeight()/2);
+                //System.out.println(tempObj.getName() + ": (" + tempObj.getActX() + ", " + tempObj.getActY() + ")");
                 g.drawImage(tempSprite, xDelta, yDelta, (int)(Game.getScale() * tempObj.getOriginWidth()), (int)(Game.getScale() * tempObj.getOriginHeight()), null);
             }
         }
@@ -251,27 +261,34 @@ public class Handler {
         }
     }
     public static void setBackgroundWidth(){
-        System.out.println("ORIGIN: " + BACKGROUND_HEIGHT);
+        //System.out.println("ORIGIN: " + BACKGROUND_HEIGHT);
         double d = Game.getTexture().getOriginWidth() * Game.getScale();
-        System.out.println("Interim: " + d);
+        //System.out.println("Interim: " + d);
         BACKGROUND_WIDTH = (int)d;
         Game.getTexture().setWidth(BACKGROUND_WIDTH);
-        System.out.println("CHANGE: " + BACKGROUND_HEIGHT);
+        //System.out.println("CHANGE: " + BACKGROUND_HEIGHT);
     }
     public static void setBackgroundHeight(){
-        System.out.println("ORIGIN: " + BACKGROUND_HEIGHT);
+        //System.out.println("ORIGIN: " + BACKGROUND_HEIGHT);
         double d = Game.getTexture().getOriginHeight() * Game.getScale();
-        System.out.println("Interim: " + d);
+        //System.out.println("Interim: " + d);
         BACKGROUND_HEIGHT = (int)d;
         Game.getTexture().setHeight(BACKGROUND_HEIGHT);
-        System.out.println("CHANGE: " + BACKGROUND_HEIGHT);
+        //System.out.println("CHANGE: " + BACKGROUND_HEIGHT);
     }
     public void checkCollision(OverworldObj tempObj){
         for(OverworldObj item : items){
             item.collision(tempObj);
+            if(item.checkCollision(tempObj) == false && (item.getName() == null ? tempObj.getName() != null : !item.getName().equals(tempObj.getName()))){
+                tempObj.setCollided(false);
+                //tempObj.setCollided(false);
+                //System.out.println("TempObj: " + tempObj.getName());
+                //System.out.println("Item: " + item.getName() + "\n");
+            }
             //System.out.println("TempObj: " + tempObj.getName());
             //System.out.println("Item: " + item.getName());
             //System.out.println("Ayyy");
         }
+        System.out.println("");
     }
 }

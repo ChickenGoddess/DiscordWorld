@@ -21,19 +21,20 @@ public class BackgroundTexture extends GameObj{
     
     private boolean atSide = false;
     
-    public BackgroundTexture(int x, int y, String name) {
+    private BufferedImage bi;
+    
+    public BackgroundTexture(int x, int y, String name, String file) {
         super(x, y, ID.Background, name);
+        bi = load.loadImage(file);
     }
 
     @Override
     public void init() {
-        BufferedImage bi = load.loadImage("../res/LARGE_elevation.jpg");
         this.setSprite(bi); //Temp, probably.
         this.width = bi.getWidth();
         this.height = bi.getHeight();
         this.origin_width = width;
         this.origin_height = height;
-        
     }
 
     @Override

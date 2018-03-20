@@ -16,6 +16,8 @@ import java.awt.image.BufferedImage;
  */
 public abstract class GameObj {
     
+    protected int actX;
+    protected int actY;
     protected int x;
     protected int y;
     protected ID id;
@@ -29,6 +31,8 @@ public abstract class GameObj {
     protected int unscaledX;
     protected int unscaledY;
     protected String name;
+    protected boolean protec;
+    protected boolean overworld = false;
     
     public GameObj(int x, int y, ID id, String name){
         this.x = x;
@@ -38,6 +42,8 @@ public abstract class GameObj {
         height = 0;
         width = 0;
         this.name = name;
+        this.actX = x + width/2;
+        this.actY = y + height/2;
     }
     
     public abstract void init();
@@ -125,5 +131,37 @@ public abstract class GameObj {
     
     public String getName(){
         return name;
+    }
+    
+    public void setActX(int x){
+        this.actX = x;
+    }
+    
+    public void setActY(int y){
+        this.actY = y;
+    }
+    
+    public int getActX(){
+        return actX;
+    }
+    
+    public int getActY(){
+        return actY;
+    }
+    
+    public void prevPoint(int x, int y){
+        //do nothing
+    }
+    
+    public void setCollided(boolean protec){
+        this.protec = protec;
+    }
+    
+    public boolean getCollided(){
+        return protec;
+    }
+    
+    public boolean getOverworld(){
+        return overworld;
     }
 }

@@ -57,6 +57,28 @@ public class Player extends OverworldObj{
         if(y > Game.getTexture().getHeight() - this.getHeight()){
             y = Game.getTexture().getHeight() - this.getHeight();
         }
+        /*
+        if(this.getTriangle() == 1 && this.getCollided() == true){
+            y -= (velY * Game.getScale());
+            unscaledY -= velY;
+            //System.out.println("1");
+        }
+        if(this.getTriangle() == 2 && this.getCollided() == true){
+            x -= (velX * Game.getScale());
+            unscaledX -= velX;
+            //System.out.println("2");
+        }
+        if(this.getTriangle() == 3 && this.getCollided() == true){
+            y -= (velY * Game.getScale());
+            unscaledY -= velY;
+            //System.out.println("3");
+        }
+        if(this.getTriangle() == 4 && this.getCollided() == true){
+            x -= velX * Game.getScale();
+            unscaledX -= velX;
+            //System.out.println("4");
+        }
+*/
         //System.out.println(this.getHeight());
         //System.out.println(this.getWidth());
         //System.out.println(this.getPosX());

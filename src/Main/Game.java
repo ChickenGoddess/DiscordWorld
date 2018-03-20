@@ -2,6 +2,7 @@ package Main;
 
 
 import EventHandledClasses.WindowChange;
+import Rooms.Room;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -28,20 +29,20 @@ public class Game extends Canvas implements Runnable{
     
     private boolean running = false;
     private Thread thread;
-    static int ORIGIN_WIDTH = 620;
-    static int ORIGIN_HEIGHT = 420;
+    static int ORIGIN_WIDTH = 1000;
+    static int ORIGIN_HEIGHT = 700;
     static int WIDTH = ORIGIN_WIDTH;
     static int HEIGHT = ORIGIN_HEIGHT;
-    private Handler handler;
     BufferedImage image;
     static boolean clampedSide = false;
     static boolean clampedUpdown = false;
-    private static GameCamera camera;
+    //private static GameCamera camera;
     static BackgroundTexture CURRENTTEXTURE;
     static int BACKGROUND_OFFSET_X;
     static int BACKGROUND_OFFSET_Y;
-    Player player;
+    //Player player;
     Obstacle fence;
+    Obstacle fence2;
     static Window window;
     private static double SCALE = 1.0000000000000000;
     private static double TEMP = HEIGHT;
@@ -52,40 +53,45 @@ public class Game extends Canvas implements Runnable{
     private static int noBorderHeight = 0;
     
     public Game(){
+        GameState.init();
         setBackgroundOffset(0, 0);
         window = new Window("Practice", WIDTH, HEIGHT, this);
-        player = new Player(WIDTH/2, HEIGHT/2, ID.Player);
+        //player = new Player(WIDTH/2, HEIGHT/2, ID.Player);
         fence = new Obstacle(WIDTH/2, HEIGHT/2, "Fence");
-        spawnPlayer(400, 400);
-        setObstacle(200, 200, fence);
-        handler = new Handler();
-        input = new KeyInput(handler);
+        fence2 = new Obstacle(WIDTH, HEIGHT, "Fence2");
+        //spawnPlayer(400, 400);
+        input = new KeyInput(Handler.instance());
         this.addKeyListener(input);
-        texture = new BackgroundTexture(BACKGROUND_OFFSET_X, BACKGROUND_OFFSET_Y, "Background_1");
-        handler.addObj(texture);
-        handler.addObj(player);
-        //handler.addObj(fence);
-        //handler.addOverObj(fence);
-        handler.addOverObj(player);
-        camera = new GameCamera(player);
-        handler.setCamera(camera);
-        handler.addObj(camera);
-        CURRENTTEXTURE = texture;
+        texture = new BackgroundTexture(BACKGROUND_OFFSET_X, BACKGROUND_OFFSET_Y, "Background_1", "../res/LARGE_elevation.jpg");
+        //Handler.instance().addObj(texture);
+        
+        Room room = new Room("Room 1", GameState.getPlayer());
+        GameState.addRoom(room);
+        GameState.setCurrentRoom(room);
+        room.setTexture(texture);
+        room.addObject(fence);
+        room.addObject(fence2);
+        GameState.init();
+        GameState.spawnPlayer(400, 400);
+        room.spawnObj(fence, 600, 500);
+        room.spawnObj(fence2, 900, 800);
+        room.init();
+        GameState.populateRoom();
+        //Handler.instance().addObj(fence);
+        //Handler.instance().addObj(fence2);
+        //Handler.instance().addObj(player);
+        //Handler.instance().addOverObj(fence);
+        //Handler.instance().addOverObj(fence2);
+        //Handler.instance().addOverObj(player);
+        //camera = new GameCamera(player);
+        //Handler.instance().setCamera(camera);
+        //Handler.instance().addObj(camera);
+        //CURRENTTEXTURE = texture;
         //bi = load.loadImage("C:\\Users\\Chicken\\Documents\\NetBeansProjects\\DiscordWorld\\testpic.PNG");
-        handler.init();
+        Handler.instance().init();
     }
     
-    void spawnPlayer(int x, int y){
-        player.setX(x);
-        player.setY(y);
-        player.setUnscaledX(x);
-        player.setUnscaledY(y);
-    }
     
-    public void setObstacle(int x, int y, Obstacle obstacle){
-        obstacle.setX(x);
-        obstacle.setY(y);
-    }
     
     void setBackgroundOffset(int x, int y){
         BACKGROUND_OFFSET_X = x;
@@ -238,10 +244,12 @@ public class Game extends Canvas implements Runnable{
                     TEMP = ORIGIN_HEIGHT * 3.5;
                     
                 }
-                Game.getTexture().setWidth((int)(Game.getTexture().getOriginWidth() * Game.getScale()));
-                Game.getTexture().setHeight((int)(Game.getTexture().getOriginHeight() * Game.getScale()));
-                player.setWidth((int)(player.getOriginWidth() * SCALE));
-                player.setHeight((int)(player.getOriginHeight() * SCALE));
+                if(GameState.getTexture() != (null)){
+                    GameState.getRoom().getTexture().setWidth((int)(Game.getTexture().getOriginWidth() * Game.getScale()));
+                    GameState.getRoom().getTexture().setHeight((int)(Game.getTexture().getOriginHeight() * Game.getScale()));
+                    GameState.instance().getPlayer().setWidth((int)(GameState.instance().getPlayer().getOriginWidth() * SCALE));
+                    GameState.instance().getPlayer().setHeight((int)(GameState.instance().getPlayer().getOriginHeight() * SCALE));
+                }
             }
             input.moveCharacter();
             if(System.currentTimeMillis() - timer > 1000){
@@ -268,7 +276,7 @@ public class Game extends Canvas implements Runnable{
     }
 
     public void tick(){
-        handler.tick();
+        Handler.instance().tick();
     }
     
     
@@ -283,7 +291,7 @@ public class Game extends Canvas implements Runnable{
         g.setColor(Color.black);
         g.fillRect(0, 0, WIDTH, HEIGHT);
         //g.drawImage(bi, 0, 0, null);
-        handler.render(g, WIDTH, HEIGHT);
+        Handler.instance().render(g, WIDTH, HEIGHT);
         g.dispose();
         bs.show();
     }  
@@ -369,6 +377,9 @@ public class Game extends Canvas implements Runnable{
     }
     public static BackgroundTexture getTexture(){
         return texture;
+    }
+    public static void setTexture(BackgroundTexture texture){
+        Game.texture = texture;
     }
     public static void setNoBorderWidth(int width){
         noBorderWidth = width;
