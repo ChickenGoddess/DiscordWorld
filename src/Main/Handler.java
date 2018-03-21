@@ -261,18 +261,18 @@ public class Handler {
     }
     public static void setBackgroundWidth(){
         //System.out.println("ORIGIN: " + BACKGROUND_HEIGHT);
-        double d = Game.getTexture().getOriginWidth() * GameState.getScale();
+        double d = GameState.getTexture().getOriginWidth() * GameState.getScale();
         //System.out.println("Interim: " + d);
         BACKGROUND_WIDTH = (int)d;
-        Game.getTexture().setWidth(BACKGROUND_WIDTH);
+        GameState.getTexture().setWidth(BACKGROUND_WIDTH);
         //System.out.println("CHANGE: " + BACKGROUND_HEIGHT);
     }
     public static void setBackgroundHeight(){
         //System.out.println("ORIGIN: " + BACKGROUND_HEIGHT);
-        double d = Game.getTexture().getOriginHeight() * GameState.getScale();
+        double d = GameState.getTexture().getOriginHeight() * GameState.getScale();
         //System.out.println("Interim: " + d);
         BACKGROUND_HEIGHT = (int)d;
-        Game.getTexture().setHeight(BACKGROUND_HEIGHT);
+        GameState.getTexture().setHeight(BACKGROUND_HEIGHT);
         //System.out.println("CHANGE: " + BACKGROUND_HEIGHT);
     }
     public void checkCollision(OverworldObj tempObj){

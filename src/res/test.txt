@@ -11,7 +11,7 @@ Rooms:
 Room1
 Offset: (0, 0)
 texture1
-Link: ../res/testpic.png
+Link: ../res/LARGE_elevation.jpg
 Room1 Obstacles:
 &&&
 fence

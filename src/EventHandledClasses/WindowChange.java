@@ -61,7 +61,7 @@ public class WindowChange extends JPanel{
             
             Handler.changeScaled(true);
             Handler.setScaledLocation();
-            if(Game.getTexture() != null){
+            if(GameState.getTexture() != null){
                 Handler.setBackgroundWidth();
                 Handler.setBackgroundHeight();
                 //System.out.println("Ayyo");
