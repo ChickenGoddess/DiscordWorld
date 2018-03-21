@@ -176,6 +176,7 @@ public class Game extends Canvas implements Runnable{
                     GameState.instance().getPlayer().setHeight((int)(GameState.instance().getPlayer().getOriginHeight() * GameState.getScale()));
                 }
             }
+            input.scaleWindow();
             input.moveCharacter();
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
