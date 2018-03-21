@@ -57,7 +57,7 @@ public class Game extends Canvas implements Runnable{
     //private static boolean BY_HEIGHT = true;
     private static int noBorderWidth = 0;
     private static int noBorderHeight = 0;
-    private static boolean initiated = false;
+    private static volatile int initiated = 0;
     //.cor files are the game files
     //.sav files are the save files
     private static String file = "src/res/test.txt";
@@ -139,14 +139,14 @@ public class Game extends Canvas implements Runnable{
     }
     
     public static void initiated(){
-        initiated = true;
+        initiated = 1;
     }
     
     @Override
     public void run() {
-        while(initiated == false){
+        while(initiated == 0){
             //do nothing
-            System.out.print("");
+            //System.out.print("");
         }
         double lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
