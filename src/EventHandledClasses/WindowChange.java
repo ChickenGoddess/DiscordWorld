@@ -6,6 +6,7 @@
 package EventHandledClasses;
 
 import Main.Game;
+import Main.GameState;
 import Main.Handler;
 import Main.Window;
 import javax.swing.*;
@@ -43,18 +44,18 @@ public class WindowChange extends JPanel{
 
         @Override
         public void componentResized(ComponentEvent e) {
-            prevWidth = Game.getFrameWidth();
-            prevHeight = Game.getFrameHeight();
+            prevWidth = GameState.getWidth();
+            prevHeight = GameState.getHeight();
             Game.setNoBorderWidth(Window.getFrame().getContentPane().getWidth());
             Game.setNoBorderHeight(Window.getFrame().getContentPane().getHeight());
-            Game.setWidth(frame.getWidth());
-            Game.setHeight(frame.getHeight());
+            GameState.setWidth(frame.getWidth());
+            GameState.setHeight(frame.getHeight());
             if(frame.getWidth() >= frame.getHeight()){
-                Game.setTemp(Game.getFrameHeight());
-                Game.setByHeight(true);
+                GameState.setTemp(GameState.getHeight());
+                GameState.setByHeight(true);
             } else{
-                Game.setTemp(Game.getFrameWidth());
-                Game.setByHeight(false);
+                GameState.setTemp(GameState.getWidth());
+                GameState.setByHeight(false);
             }
             
             

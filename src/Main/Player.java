@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,14 +22,32 @@ public class Player extends OverworldObj{
     
     ImageLoader load = new ImageLoader();
     ArrayList<BufferedImage> sprites = new ArrayList<BufferedImage>();
+    private String link;
 
-    public Player(int x, int y, ID id) {
-        super(x, y, id, "Player");
+    public Player(int x, int y, String link) {
+        super(x, y, ID.Player, "Player");
+        this.link = link;
+    }
+    
+    public Player(Scanner scan){
+        super(scan);
+        String line = scan.nextLine();
+        name = scan.nextLine();
+        line = scan.nextLine();
+        String s = line.substring(line.indexOf("(") + 1, line.indexOf(","));
+        String s2 = line.substring(line.indexOf(",") + 2, line.length() - 1);
+        this.setX(Integer.valueOf(s));
+        this.setY(Integer.valueOf(s2));
+        this.setUnscaledX(Integer.valueOf(s));
+        this.setUnscaledY(Integer.valueOf(s2));
+        line = scan.nextLine();
+        s = line.substring(line.indexOf(":") + 2, line.length());
+        this.link = s;
     }
 
     @Override
     public void init() {
-        BufferedImage louder = load.loadImage("../res/louder.png");
+        BufferedImage louder = load.loadImage(link);
         width = louder.getWidth();
         height = louder.getHeight();
         origin_width = width;
@@ -41,8 +60,8 @@ public class Player extends OverworldObj{
 
     @Override
     public void tick() {
-        x += (velX * Game.getScale());
-        y += (velY * Game.getScale());
+        x += (velX * GameState.getScale());
+        y += (velY * GameState.getScale());
         unscaledX += velX;
         unscaledY += velY;
         if(x < 0){
@@ -51,11 +70,11 @@ public class Player extends OverworldObj{
         if(y < 0){
             y = 0;
         }
-        if(x > Game.getTexture().getWidth() - this.getWidth()){
-            x = Game.getTexture().getWidth() - this.getWidth();
+        if(x > GameState.getTexture().getWidth() - this.getWidth()){
+            x = GameState.getTexture().getWidth() - this.getWidth();
         }
-        if(y > Game.getTexture().getHeight() - this.getHeight()){
-            y = Game.getTexture().getHeight() - this.getHeight();
+        if(y > GameState.getTexture().getHeight() - this.getHeight()){
+            y = GameState.getTexture().getHeight() - this.getHeight();
         }
         /*
         if(this.getTriangle() == 1 && this.getCollided() == true){
@@ -85,11 +104,11 @@ public class Player extends OverworldObj{
         //System.out.println(this.getPosY());
         //System.out.println(Game.getTexture().getHeight());
         //System.out.println(Game.getTexture().getWidth());
-        if(unscaledX > Game.getTexture().getOriginWidth() - this.getOriginWidth()){
-            unscaledX = Game.getTexture().getOriginWidth() - this.getOriginWidth();
+        if(unscaledX > GameState.getTexture().getOriginWidth() - this.getOriginWidth()){
+            unscaledX = GameState.getTexture().getOriginWidth() - this.getOriginWidth();
         }
-        if(unscaledY > Game.getTexture().getOriginHeight() - this.getOriginHeight()){
-            unscaledY = Game.getTexture().getOriginHeight() - this.getOriginHeight();
+        if(unscaledY > GameState.getTexture().getOriginHeight() - this.getOriginHeight()){
+            unscaledY = GameState.getTexture().getOriginHeight() - this.getOriginHeight();
         }
         if(unscaledX < 0){
             unscaledX = 0;

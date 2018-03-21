@@ -1,0 +1,26 @@
+Title: Test1
+Size: 640 x 400
+===
+Player:
+player
+(400, 400)
+Link: ../res/louder.png
+===
+Rooms:
+---
+Room1
+Offset: (0, 0)
+texture1
+Link: ../res/testpic.png
+Room1 Obstacles:
+&&&
+fence
+(600, 800)
+Link: ../res/fence_tile.png
+---
+fence2
+(900, 1300)
+Link: ../res/fence_tile.png
+---
+&&&
+===

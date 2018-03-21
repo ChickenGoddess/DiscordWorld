@@ -3,6 +3,7 @@ package Main;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Scanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -44,6 +45,10 @@ public abstract class GameObj {
         this.name = name;
         this.actX = x + width/2;
         this.actY = y + height/2;
+    }
+    
+    public GameObj(Scanner scan){
+        
     }
     
     public abstract void init();

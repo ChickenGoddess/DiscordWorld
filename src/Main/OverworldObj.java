@@ -1,5 +1,7 @@
 package Main;
 
+import java.util.Scanner;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,6 +23,10 @@ public abstract class OverworldObj extends GameObj{
     public OverworldObj(int x, int y, ID id, String name) {
         super(x, y, id, name);
         overworld = true;
+    }
+    
+    public OverworldObj(Scanner scan){
+        super(scan);
     }
     
     public void collision(OverworldObj object){
@@ -195,10 +201,10 @@ public abstract class OverworldObj extends GameObj{
     }
     
     public boolean checkCollision(OverworldObj object){
-        if(this.getPosX() <= (object.getUnscaledX() + object.getOriginWidth()) * Game.getScale() &&
-                this.getPosY() <= (object.getUnscaledY() + object.getOriginWidth()) * Game.getScale() &&
-                (this.getUnscaledX() + this.getOriginWidth()) * Game.getScale() >= object.getPosX() &&
-                (this.getUnscaledY() + this.getOriginHeight()) * Game.getScale() >= object.getPosY() &&
+        if(this.getPosX() <= (object.getUnscaledX() + object.getOriginWidth()) * GameState.getScale() &&
+                this.getPosY() <= (object.getUnscaledY() + object.getOriginWidth()) * GameState.getScale() &&
+                (this.getUnscaledX() + this.getOriginWidth()) * GameState.getScale() >= object.getPosX() &&
+                (this.getUnscaledY() + this.getOriginHeight()) * GameState.getScale() >= object.getPosY() &&
                 (this.getName() == null ? object.getName() != null : !this.getName().equals(object.getName()))){
             
             this.setCollided(true);

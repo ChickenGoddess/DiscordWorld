@@ -4,6 +4,7 @@ package Main;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.FileReader;
+import java.util.Scanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -26,6 +27,10 @@ public class BackgroundTexture extends GameObj{
     public BackgroundTexture(int x, int y, String name, String file) {
         super(x, y, ID.Background, name);
         bi = load.loadImage(file);
+    }
+    
+    public BackgroundTexture(Scanner scan){
+        super(scan);
     }
 
     @Override

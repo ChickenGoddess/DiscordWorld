@@ -7,6 +7,7 @@ package Main;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Scanner;
 
 /**
  *
@@ -15,14 +16,21 @@ import java.awt.image.BufferedImage;
 public class Obstacle extends OverworldObj{
 
     ImageLoader load = new ImageLoader();
+    private String file;
     
-    public Obstacle(int x, int y, String name) {
+    public Obstacle(int x, int y, String name, String file) {
         super(x, y, ID.Obstacle, name);
+        this.file = file;
+        this.name = name;
+    }
+    
+    public Obstacle(Scanner scan){
+        super(scan);
     }
 
     @Override
     public void init() {
-        BufferedImage louder = load.loadImage("../res/fence_tile.png");
+        BufferedImage louder = load.loadImage(file);
         width = louder.getWidth();
         height = louder.getHeight();
         origin_width = width;

@@ -14,6 +14,7 @@ import Main.OverworldObj;
 import Main.Player;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -29,8 +30,13 @@ public class Room {
     private int offsetY;
     
     
-    public Room(String name, Player player){
+    public Room(String name, Player player, BackgroundTexture texture){
         this.name = name;
+        this.texture = texture;
+    }
+    
+    public Room(Scanner scan){
+        
     }
     
     public void init(){
