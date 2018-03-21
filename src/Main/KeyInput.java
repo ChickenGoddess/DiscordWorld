@@ -26,7 +26,7 @@ public class KeyInput extends KeyAdapter{
     private boolean dir3 = false;
     private boolean dir4 = false;
     private boolean running = false;
-    
+    private int zoom = 0;
     public KeyInput(Handler handler){
         this.handler = handler;
     }
@@ -62,6 +62,20 @@ public class KeyInput extends KeyAdapter{
                         }
                         if(!pressed.contains(KeyEvent.VK_SHIFT)){
                             running = false;
+                        }
+                        if (key == KeyEvent.VK_O) {
+                            if (pressed.contains(KeyEvent.VK_I)) {
+                                zoom = 0;
+                            } else {
+                                zoom = -1;
+                            }
+                        }
+                        if (key == KeyEvent.VK_I) {
+                            if (pressed.contains(KeyEvent.VK_O)) {
+                                zoom = 0;
+                            } else {
+                                zoom = 1;
+                            }
                         }
                        // System.out.println(tempObj.getCollided());
                         //System.out.println(tempObj.getTriangle());
@@ -122,6 +136,20 @@ public class KeyInput extends KeyAdapter{
                         //playerVel = 5;
                         running = false;
                     }
+                    if (key == KeyEvent.VK_O) {
+                        if (pressed.contains(KeyEvent.VK_I)) {
+                            zoom = 1;
+                        } else {
+                            zoom = 0;
+                        }
+                    }
+                    if (key == KeyEvent.VK_I) {
+                        if (pressed.contains(KeyEvent.VK_O)) {
+                            zoom = -1;
+                        } else {
+                            zoom = 0;
+                        }
+                    }
                         
                     
                     pressed.remove(e.getKeyCode());
@@ -145,6 +173,15 @@ public class KeyInput extends KeyAdapter{
 */
         }
         
+    }
+    
+    public void scaleWindow() {
+        //System.out.printf("Zoom: %s%n", zoom);
+        /*
+        * TODO: Change the scale of everything based on the direction indicated
+        * in zoom.
+        * Current bindings: O -> Zoom out, I -> Zoom in
+        */
     }
     
     public void moveCharacter(){
