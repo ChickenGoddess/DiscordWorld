@@ -43,7 +43,23 @@ public class Room {
         for(OverworldObj obj : objects){
             Handler.instance().addOverObj(obj);
         }
-    }  
+        for(Exit exit : exits){
+            Handler.instance().addExit(exit);
+        }
+    }
+    
+    public void depopulate(){
+        for(OverworldObj obj : objects){
+            Handler.instance().removeOverObj(obj);
+        }
+        for(Exit exit : exits){
+            Handler.instance().removeExit(exit);
+        }
+    }
+    
+    public int getObjSize(){
+        return objects.size();
+    }
     
     public void setName(String name){
         this.name = name;
@@ -55,11 +71,20 @@ public class Room {
     
     public void addObject(OverworldObj object){
         objects.add(object);
-        GameState.addObject(object);
+        //GameState.addObject(object);
     }
     
     public OverworldObj getObject(int i){
         return objects.get(i);
+    }
+    
+    public OverworldObj getObject(String name){
+        for(OverworldObj object : objects){
+            if(object.getName().equals(name)){
+                return object;
+            }
+        }
+        return null;
     }
     
     public void addExit(Exit exit){

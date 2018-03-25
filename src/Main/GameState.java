@@ -6,6 +6,7 @@
 package Main;
 
 import static Main.Game.WIDTH;
+import Rooms.Exit;
 import Rooms.Room;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class GameState {
         WINDOW = new Window(name, width, height, game);
     }
     
-    public static Room getRoom(){
+    public static Room getCurrentRoom(){
         return GameState.CURRENT_ROOM;
     }
     
@@ -73,8 +74,8 @@ public class GameState {
         }
         line = scan.nextLine();
         if("Rooms:".equals(scan.nextLine())){
+            line = scan.nextLine();
             while(!scan.hasNext("===")){
-                line = scan.nextLine();
                 String name = scan.nextLine();
                 line = scan.nextLine();
                 String s1 = line.substring(line.indexOf("(") + 1, line.indexOf(","));
@@ -99,11 +100,15 @@ public class GameState {
                         line = scan.nextLine();
                     }
                 }
-                room.init();
+                //room.init();
                 line = scan.nextLine();
+                //line = scan.nextLine();
             }
         }
-        
+        Exit exit1 = new Exit(getRoom("Room1"), getRoom("Room2"), 0, 0, 100, 100, 0, 0, 100, 100, 3);
+        getRoom("Room1").addExit(exit1);
+        Exit exit2 = new Exit(getRoom("Room2"), getRoom("Room1"), 0, 0, 100, 100, 0, 0, 100, 100, 3);
+        getRoom("Room2").addExit(exit2);
     }
     
     public static void setWidth(int width){
@@ -159,6 +164,7 @@ public class GameState {
             setCameraTarget(player);
             Handler.instance().setCamera(CAMERA);
         }
+        
         setCurrentRoom(getRoom("Room1"));
     }
     
@@ -172,17 +178,31 @@ public class GameState {
     }
     
     public static void populateRoom(){
-        setTexture(getRoom().getTexture());
+        
+        setTexture(getCurrentRoom().getTexture());
         Handler.instance().addObj(TEXTURE);
         Handler.instance().addObj(player);
         Handler.instance().addOverObj(player);
         Handler.instance().addObj(CAMERA);
-        
-        for(OverworldObj obj : objects){
-            Handler.instance().addObj(obj);
-            getRoom().init();
+        for(int i = 0; i < getCurrentRoom().getObjSize(); i++){
+            Handler.instance().addObj(getCurrentRoom().getObject(i));
+            
             //Handler.instance().addOverObj(obj);
         }
+        getCurrentRoom().init();
+    }
+    
+    public static void depopulateRoom(){
+        for(int i = 0; i < getCurrentRoom().getObjSize(); i++){
+            Handler.instance().removeObj(getCurrentRoom().getObject(i));
+            
+            //Handler.instance().addOverObj(obj);
+        }
+        Handler.instance().removeObj(TEXTURE);
+        Handler.instance().removeObj(player);
+        Handler.instance().removeObj(CAMERA);
+        Handler.instance().removeOverObj(player);
+        getCurrentRoom().depopulate();
     }
     
     public static void addObject(OverworldObj obj){
@@ -268,6 +288,46 @@ public class GameState {
     }
     public static boolean getByHeight(){
         return BY_HEIGHT;
+    }
+    
+    public static void changeRoom(Exit exit){
+        depopulateRoom();
+        setCurrentRoom(exit.getDestination());
+        populateRoom();
+        if(exit.getExitSide() == 0){
+            int nextX = exit.getDestX() + (int)(.5 * getScale() * exit.getDestWidth()) - (int)(.5 * player.getWidth());
+            int nextY = exit.getDestY() + (int)(.5 * getScale() * exit.getDestHeight()) - (int)(.5 * player.getHeight());
+            spawnPlayer(nextX, nextY);
+        } else if(exit.getExitSide() == 1){
+            int nextX = exit.getDestX() + (int)(.5 * getScale() * exit.getDestWidth()) - (int)(.5 * player.getWidth());
+            int nextY = exit.getDestY() - player.getHeight() - (int)(3 * getScale());
+            spawnPlayer(nextX, nextY);
+        } else if(exit.getExitSide() == 2){
+            int nextX = exit.getDestX() + exit.getDestWidth() + (int)(3 * getScale());
+            
+            int nextY = exit.getDestY() + (int)(.5 * getScale() * exit.getDestHeight()) - (int)(.5 * player.getHeight());
+            spawnPlayer(nextX, nextY);
+        } else if(exit.getExitSide() == 3){
+            int nextX = exit.getDestX() + (int)(.5 * getScale()* exit.getDestWidth()) - (int)(.5 * player.getWidth());
+            //System.out.println((0.5 * getScale() * exit.getDestHeight()));
+            int nextY = exit.getDestY() + exit.getDestHeight() + (int)(3 * getScale());
+            spawnPlayer(nextX, nextY);
+        } else if(exit.getExitSide() == 4){
+            int nextX = exit.getDestX() - player.getWidth() - (int)(3 * getScale());
+            int nextY = exit.getDestY() + (int)(.5 * getScale() * exit.getDestHeight()) - (int)(.5 * player.getHeight());
+            spawnPlayer(nextX, nextY);
+        }
+        Handler.instance().setChange(true);
+    }
+    
+    public static void checkExitCollision(Exit exit){
+        if(player.getPosX() <= (exit.getSourceX()+ exit.getSourceWidth()) * GameState.getScale() &&
+                player.getPosY() <= (exit.getSourceY() + exit.getSourceWidth()) * GameState.getScale() &&
+                (player.getUnscaledX() + player.getOriginWidth()) * GameState.getScale() >= exit.getSourceX() * GameState.getScale() &&
+                (player.getUnscaledY() + player.getOriginHeight()) * GameState.getScale() >= exit.getSourceY() * GameState.getScale()){
+            //System.out.println("God I'm pretty");
+            changeRoom(exit);
+        }
     }
     
 }

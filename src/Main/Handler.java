@@ -1,6 +1,8 @@
 package Main;
 
 
+import Rooms.Exit;
+import Rooms.Room;
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.awt.image.BufferedImage;
@@ -18,8 +20,9 @@ import java.util.List;
  */
 public class Handler {
     
-    public static List<GameObj> object = new LinkedList<>();
+    public static List<GameObj> objects = new LinkedList<>();
     public static List<OverworldObj> items = new LinkedList<>();
+    public static List<Exit> exits = new LinkedList<>();
     private GameCamera camera;
     private boolean initialized = false;
     private static int BACKGROUND_HEIGHT = 0;
@@ -29,6 +32,7 @@ public class Handler {
     private boolean largerX = false;
     private boolean largerY = false;
     private static boolean changedScale = false;
+    private static boolean CHANGE = false;
     
     private static Handler HANDLER = new Handler();
     
@@ -37,7 +41,10 @@ public class Handler {
     }
     
     public void init() {
-        for (GameObj tempObj : object) {
+        for (GameObj tempObj : objects) {
+            if(tempObj == null){
+                break;
+            }
             
             tempObj.init();
             if(tempObj.getID() == ID.Background){
@@ -60,7 +67,10 @@ public class Handler {
             return;
         }
 
-        for (GameObj tempObj : object) {
+        for (GameObj tempObj : objects) {
+            if(tempObj == null){
+                break;
+            }
             tempObj.tick();
         }
     }
@@ -73,9 +83,17 @@ public class Handler {
         int count = 1;
         for(OverworldObj tempObj : items){
             this.checkCollision(tempObj);
+            if(CHANGE == true){
+                //setChange(false);
+                break;
+            }
         }
-        for (GameObj tempObj : object) {
+        
+        for (GameObj tempObj : objects) {
             //System.out.println(tempObj.getName());
+            if(tempObj == null){
+                break;
+            }
             BufferedImage tempSprite = tempObj.getSprite();
             if (tempSprite != null) {
                 
@@ -208,7 +226,7 @@ public class Handler {
                     //System.out.println(tempObj.getName() + ": " + tempObj.getHeight() + ", " + tempObj.getWidth());
                     //System.out.println(tempObj.getID() + ": " + tempObj.getPosX() + ", " + tempObj.getPosY());
                     count++;
-                    if(object.size() == count){
+                    if(objects.size() == count){
                         changeScaled(false);
                         count = 1;
                     }
@@ -224,12 +242,20 @@ public class Handler {
         }
     }
     
+    public void addExit(Exit exit){
+        exits.add(exit);
+    }
+    
+    public void removeExit(Exit exit){
+        exits.remove(exit);
+    }
+    
     public void addObj(GameObj obj){
-        object.add(obj);
+        objects.add(obj);
     }
     
     public void removeObj(GameObj obj){
-        object.remove(obj);
+        objects.remove(obj);
     }
     
     public void addOverObj(OverworldObj obj){
@@ -250,7 +276,7 @@ public class Handler {
         return changedScale;
     }
     public static void setScaledLocation(){
-        for(GameObj tempObj : object){
+        for(GameObj tempObj : objects){
             GameState.calculateScale(GameState.getByHeight());
             tempObj.setX((int)(tempObj.getUnscaledX() * GameState.getScale()));
             tempObj.setY((int)(tempObj.getUnscaledY() * GameState.getScale()));
@@ -289,5 +315,16 @@ public class Handler {
             //System.out.println("Ayyy");
         }
         //System.out.println("");
+        for(Exit exit : exits){
+            GameState.checkExitCollision(exit);
+            if(CHANGE == true){
+                //setChange(false);
+                break;
+            }
+        }
+    }
+    
+    public static void setChange(boolean bool){
+        CHANGE = bool;
     }
 }

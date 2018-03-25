@@ -4,7 +4,7 @@ Size: 640 x 400
 Player:
 player
 (400, 400)
-Link: ../res/louder.png
+Link: ../res/skel.png
 ===
 Rooms:
 ---
@@ -20,6 +20,17 @@ Link: ../res/fence_tile.png
 ---
 fence2
 (900, 1300)
+Link: ../res/fence_tile.png
+---
+&&&
+Room2
+Offset: (0, 0)
+texture2
+Link: ../res/testpic.png
+Room2 Obstacles:
+&&&
+fence3
+(300, 20)
 Link: ../res/fence_tile.png
 ---
 &&&

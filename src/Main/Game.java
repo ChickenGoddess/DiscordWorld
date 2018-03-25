@@ -61,6 +61,7 @@ public class Game extends Canvas implements Runnable{
     //.cor files are the game files
     //.sav files are the save files
     private static String file = "src/res/test.txt";
+    private static volatile int sleeper = 0;
     
     public Game() throws FileNotFoundException{
         Scanner scan = new Scanner(new BufferedReader(new FileReader(file)));
@@ -170,8 +171,8 @@ public class Game extends Canvas implements Runnable{
             frames++;
             if(System.currentTimeMillis() - timer > 100){
                 if(GameState.getTexture() != (null)){
-                    GameState.getRoom().getTexture().setWidth((int)(GameState.getTexture().getOriginWidth() * GameState.getScale()));
-                    GameState.getRoom().getTexture().setHeight((int)(GameState.getTexture().getOriginHeight() * GameState.getScale()));
+                    GameState.getCurrentRoom().getTexture().setWidth((int)(GameState.getTexture().getOriginWidth() * GameState.getScale()));
+                    GameState.getCurrentRoom().getTexture().setHeight((int)(GameState.getTexture().getOriginHeight() * GameState.getScale()));
                     GameState.instance().getPlayer().setWidth((int)(GameState.instance().getPlayer().getOriginWidth() * GameState.getScale()));
                     GameState.instance().getPlayer().setHeight((int)(GameState.instance().getPlayer().getOriginHeight() * GameState.getScale()));
                 }
@@ -196,6 +197,15 @@ public class Game extends Canvas implements Runnable{
                 Thread.sleep(16); //Pause thread for x milliseconds. May need to adjust this value later.
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+            if(initiated == 0){
+                try{
+                    Thread.sleep(sleeper);
+                    initiated = 1;
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+                }
             }
         }
         stop();
