@@ -105,10 +105,10 @@ public class GameState {
                 //line = scan.nextLine();
             }
         }
-        Exit exit1 = new Exit(getRoom("Room1"), getRoom("Room2"), 0, 0, 100, 100, 0, 0, 100, 100, 3);
-        getRoom("Room1").addExit(exit1);
+        Exit exit1 = new Exit(getRoom("Room1"), getRoom("Room2"), 0, 0, 100, 100, 0, 0, 100, 100, 2);
+        //getRoom("Room1").addExit(exit1);
         Exit exit2 = new Exit(getRoom("Room2"), getRoom("Room1"), 0, 0, 100, 100, 0, 0, 100, 100, 3);
-        getRoom("Room2").addExit(exit2);
+        //getRoom("Room2").addExit(exit2);
     }
     
     public static void setWidth(int width){
@@ -190,6 +190,7 @@ public class GameState {
             //Handler.instance().addOverObj(obj);
         }
         getCurrentRoom().init();
+        Handler.instance().init();
     }
     
     public static void depopulateRoom(){
@@ -294,27 +295,33 @@ public class GameState {
         depopulateRoom();
         setCurrentRoom(exit.getDestination());
         populateRoom();
+        //System.out.println("Scale: " + getScale());
         if(exit.getExitSide() == 0){
-            int nextX = exit.getDestX() + (int)(.5 * getScale() * exit.getDestWidth()) - (int)(.5 * player.getWidth());
-            int nextY = exit.getDestY() + (int)(.5 * getScale() * exit.getDestHeight()) - (int)(.5 * player.getHeight());
+            int nextX = (int)(exit.getDestX() * getScale()) + (int)(.5 * getScale() * exit.getDestWidth()) - (int)(.5 * player.getWidth());
+            int nextY = (int)(exit.getDestY() * getScale()) + (int)(.5 * getScale() * exit.getDestHeight()) - (int)(.5 * player.getHeight());
+            //System.out.println(nextX + " " + nextY);
             spawnPlayer(nextX, nextY);
         } else if(exit.getExitSide() == 1){
-            int nextX = exit.getDestX() + (int)(.5 * getScale() * exit.getDestWidth()) - (int)(.5 * player.getWidth());
-            int nextY = exit.getDestY() - player.getHeight() - (int)(3 * getScale());
+            int nextX = (int)(exit.getDestX() * getScale()) + (int)(.5 * getScale() * exit.getDestWidth()) - (int)(.5 * player.getWidth());
+            int nextY = (int)(exit.getDestY() * getScale()) - player.getHeight() - (int)(3 * getScale());
+            //System.out.println(nextX + " " + nextY);
             spawnPlayer(nextX, nextY);
         } else if(exit.getExitSide() == 2){
-            int nextX = exit.getDestX() + exit.getDestWidth() + (int)(3 * getScale());
+            int nextX = (int)((exit.getDestX() + exit.getDestWidth()) * getScale()) + (int)(3 * getScale());
             
-            int nextY = exit.getDestY() + (int)(.5 * getScale() * exit.getDestHeight()) - (int)(.5 * player.getHeight());
+            int nextY = (int)(exit.getDestY() * getScale()) + (int)(.5 * getScale() * exit.getDestHeight()) - (int)(.5 * player.getHeight());
+            //System.out.println(nextX + " " + nextY);
             spawnPlayer(nextX, nextY);
         } else if(exit.getExitSide() == 3){
-            int nextX = exit.getDestX() + (int)(.5 * getScale()* exit.getDestWidth()) - (int)(.5 * player.getWidth());
-            //System.out.println((0.5 * getScale() * exit.getDestHeight()));
-            int nextY = exit.getDestY() + exit.getDestHeight() + (int)(3 * getScale());
+            int nextX = (int)(exit.getDestX() * getScale()) + (int)(.5 * getScale()* exit.getDestWidth()) - (int)(.5 * player.getWidth());
+            
+            int nextY = (int)((exit.getDestY() + exit.getDestHeight()) * getScale()) + (int)(3 * getScale());
+            System.out.println(nextX + " " + nextY);
             spawnPlayer(nextX, nextY);
         } else if(exit.getExitSide() == 4){
-            int nextX = exit.getDestX() - player.getWidth() - (int)(3 * getScale());
-            int nextY = exit.getDestY() + (int)(.5 * getScale() * exit.getDestHeight()) - (int)(.5 * player.getHeight());
+            int nextX = (int)(exit.getDestX() * getScale()) - player.getWidth() - (int)(3 * getScale());
+            int nextY = (int)(exit.getDestY() * getScale()) + (int)(.5 * getScale() * exit.getDestHeight()) - (int)(.5 * player.getHeight());
+            //System.out.println(nextX + " " + nextY);
             spawnPlayer(nextX, nextY);
         }
         Handler.instance().setChange(true);

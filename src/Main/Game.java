@@ -102,7 +102,7 @@ public class Game extends Canvas implements Runnable{
         //Handler.instance().addObj(camera);
         //CURRENTTEXTURE = texture;
         //bi = load.loadImage("C:\\Users\\Chicken\\Documents\\NetBeansProjects\\DiscordWorld\\testpic.PNG");
-        Handler.instance().init();
+        //Handler.instance().init();
         initiated();
     }
     

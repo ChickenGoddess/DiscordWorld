@@ -29,9 +29,5 @@ texture2
 Link: ../res/testpic.png
 Room2 Obstacles:
 &&&
-fence3
-(300, 20)
-Link: ../res/fence_tile.png
----
 &&&
 ===
