@@ -39,7 +39,7 @@ public class GameCamera extends GameObj {
     @Override
     public void tick() {
         
-        
+        //System.out.println("Following: " + followX + ", " + followY);
         if (this.target != null && this.followX && this.followY) {
             this.setX(this.target.getPosX() - GameState.getWidth()/2 + this.target.getWidth()/2);
             this.setY(this.target.getPosY() - GameState.getHeight()/2 + this.target.getHeight()/2);

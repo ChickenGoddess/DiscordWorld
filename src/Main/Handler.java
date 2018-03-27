@@ -107,17 +107,17 @@ public class Handler {
                     
                     
                     if(largerX == false && largerY == false){
-                        /*
-                        System.out.println("Game width/height: " + Game.WIDTH + ", " + Game.HEIGHT);
-                        System.out.println("Background width/height: " + BACKGROUND_WIDTH + ", " + BACKGROUND_HEIGHT);
-                        System.out.println("Sprite width/height: " + camera.getTarget().getWidth() + ", " + camera.getTarget().getHeight());
-                        System.out.println("Player Location: " + camera.getTarget().getPosX() + ", " + camera.getTarget().getPosY());
-                        System.out.println("Player Unscaled Location: " + camera.getTarget().getUnscaledX() + ", " + camera.getTarget().getUnscaledY());
+                        
+                        //System.out.println("Game width/height: " + GameState.getWidth() + ", " + GameState.getHeight());
+                        //System.out.println("Background width/height: " + BACKGROUND_WIDTH + ", " + BACKGROUND_HEIGHT);
+                        //System.out.println("Sprite width/height: " + camera.getTarget().getWidth() + ", " + camera.getTarget().getHeight());
+                        //System.out.println("Player Location: " + camera.getTarget().getPosX() + ", " + camera.getTarget().getPosY());
+                        //System.out.println("Player Unscaled Location: " + camera.getTarget().getUnscaledX() + ", " + camera.getTarget().getUnscaledY());
                         System.out.println("Camera Location: " + camera.getPosX() + ", " + camera.getPosY());
-                        System.out.println("No Border Width/Height: " + Game.getNoBorderWidth() + ", " + Game.getNoBorderHeight());
-                        System.out.println("tempObj.getPosX() + tempObj.getWidth()/2: " + (tempObj.getPosX() + tempObj.getWidth()/2));
-                        System.out.println("Game.getTexture().getSprite().getWidth() - Game.getNoBorderHeight() + Game.BACKGROUND_OFFSET_X: " + (Game.getTexture().getSprite().getWidth() - Game.getFrameWidth()/2 + Game.BACKGROUND_OFFSET_X));
-                        */
+                        //System.out.println("No Border Width/Height: " + GameState.getNoBorderWidth() + ", " + Game.getNoBorderHeight());
+                        //System.out.println("tempObj.getPosX() + tempObj.getWidth()/2: " + (tempObj.getPosX() + tempObj.getWidth()/2));
+                        //System.out.println("Game.getTexture().getSprite().getWidth() - Game.getNoBorderHeight() + Game.BACKGROUND_OFFSET_X: " + (GameState.getTexture().getSprite().getWidth() - GameState.getFrameWidth()/2 + Game.BACKGROUND_OFFSET_X));
+                        
                         if(tempObj.getUnscaledX()<= GameState.getOriginWidth()/2 + Game.BACKGROUND_OFFSET_X - camera.getTarget().getOriginWidth()/2){
                             this.camera.setFollowX(false);
                             this.camera.setX(0);
@@ -144,6 +144,7 @@ public class Handler {
                             freeCam = true;
                         }
                         done = true;
+                        
                     } else if(largerX == true && largerY == false){
                         this.camera.setX(BACKGROUND_WIDTH/2 - Game.WIDTH/2);
                         if(freeCam = true){
