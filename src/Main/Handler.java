@@ -39,7 +39,7 @@ public class Handler {
     public static Handler instance(){
         return HANDLER;
     }
-    
+        
     public void init() {
         for (GameObj tempObj : objects) {
             if(tempObj == null){
@@ -136,15 +136,15 @@ public class Handler {
                             this.camera.setY(0);
                             done = false;
                             freeCam = false;
-                        } if(tempObj.getPosX() + tempObj.getWidth()/2 - 9 >= BACKGROUND_WIDTH - Game.getNoBorderWidth()/2 + Game.BACKGROUND_OFFSET_X){
+                        } if(tempObj.getPosX() + tempObj.getWidth()/2 - 9 >= BACKGROUND_WIDTH - GameState.getNoBorderWidth()/2 + GameState.getOffsetX()){
                             this.camera.setFollowX(false);
-                            this.camera.setX(BACKGROUND_WIDTH - Game.getNoBorderWidth());
+                            this.camera.setX(BACKGROUND_WIDTH - GameState.getNoBorderWidth());
                             done = false;
                             freeCam = false;
 
-                        } if(tempObj.getPosY() + tempObj.getHeight()/2 - 18 >= BACKGROUND_HEIGHT - Game.getNoBorderHeight()/2 + Game.BACKGROUND_OFFSET_Y){
+                        } if(tempObj.getPosY() + tempObj.getHeight()/2 - 18 >= BACKGROUND_HEIGHT - GameState.getNoBorderHeight()/2 + GameState.getOffsetY()){
                             this.camera.setFollowY(false);
-                            this.camera.setY(BACKGROUND_HEIGHT - Game.getNoBorderHeight());
+                            this.camera.setY(BACKGROUND_HEIGHT - GameState.getNoBorderHeight());
                             done = false;
                             freeCam = false;
                         } 
@@ -311,6 +311,7 @@ public class Handler {
         //System.out.println("CHANGE: " + BACKGROUND_HEIGHT);
     }
     public void checkCollision(OverworldObj tempObj){
+        System.out.println(tempObj.getName() + ": (" + tempObj.getUnscaledX() + ", " + tempObj.getUnscaledY() + "); (" + tempObj.getPosX() + ", " + tempObj.getPosY() + "); (" + tempObj.getWidth() + ", " + tempObj.getHeight() + ") ");
         for(OverworldObj item : items){
             item.collision(tempObj);
             if(item.checkCollision(tempObj) == false && (item.getName() == null ? tempObj.getName() != null : !item.getName().equals(tempObj.getName()))){

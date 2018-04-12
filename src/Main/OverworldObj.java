@@ -202,6 +202,17 @@ public abstract class OverworldObj extends GameObj{
     }
     
     public boolean checkCollision(OverworldObj object){
+        /*
+        System.out.println(object.getName() + " pos: (" + object.getPosX() + ", " + object.getPosY() + ")");
+        System.out.println(object.getName() + " unscaled pos: (" + object.getUnscaledX() + ", " + object.getUnscaledY() + ")");
+        System.out.println(object.getName() + " size: (" + object.getWidth() + ", " + object.getHeight() + ")");
+        System.out.println(object.getName() + " unscaled size: (" + object.getOriginWidth() + ", " + object.getOriginHeight() + ")");
+        System.out.println(object.getName() + " this pos: (" + this.getPosX() + ", " + this.getPosY() + ")");
+        System.out.println(object.getName() + " this unscaled pos: (" + this.getUnscaledX() + ", " + this.getUnscaledY() + ")");
+        System.out.println(object.getName() + " this size: (" + this.getWidth() + ", " + this.getHeight() + ")");
+        System.out.println(object.getName() + " this unscaled size: (" + this.getOriginWidth() + ", " + this.getOriginHeight() + ")");
+        System.out.println("");
+*/
         if(this.getPosX() <= (object.getUnscaledX() + object.getOriginWidth()) * GameState.getScale() &&
                 this.getPosY() <= (object.getUnscaledY() + object.getOriginWidth()) * GameState.getScale() &&
                 (this.getUnscaledX() + this.getOriginWidth()) * GameState.getScale() >= object.getPosX() &&

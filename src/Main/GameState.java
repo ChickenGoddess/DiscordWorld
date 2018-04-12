@@ -34,6 +34,10 @@ public class GameState {
     private static double SCALE = 1.0000000000000000;
     private static double TEMP = HEIGHT;
     private static boolean BY_HEIGHT = true;
+    private static int BACKGROUND_OFFSET_X;
+    private static int BACKGROUND_OFFSET_Y;
+    private static int noBorderWidth = 0;
+    private static int noBorderHeight = 0;
     
     public static Window getWindow(){
         return WINDOW;
@@ -343,6 +347,31 @@ public class GameState {
             System.out.println("Man I'm pretty");
             changeRoom(exit);
         }
+    }
+
+    static int getOffsetX() {
+        return BACKGROUND_OFFSET_X;
+    }
+    
+    static int getOffsetY(){
+        return BACKGROUND_OFFSET_Y;
+    }
+    
+    static void setOffset(int x, int y){
+        GameState.BACKGROUND_OFFSET_X = x;
+        GameState.BACKGROUND_OFFSET_Y = y;
+    }
+    public static void setNoBorderWidth(int width){
+        noBorderWidth = width;
+    }
+    public static void setNoBorderHeight(int height){
+        noBorderHeight = height;
+    }
+    public static int getNoBorderWidth(){
+        return noBorderWidth;
+    }
+    public static int getNoBorderHeight(){
+        return noBorderHeight;
     }
     
 }

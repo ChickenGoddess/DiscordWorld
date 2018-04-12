@@ -17,6 +17,7 @@ public class Obstacle extends OverworldObj{
 
     ImageLoader load = new ImageLoader();
     private String file;
+    BufferedImage louder = null;
     
     public Obstacle(int x, int y, String name, String file) {
         super(x, y, ID.Obstacle, name);
@@ -30,15 +31,17 @@ public class Obstacle extends OverworldObj{
 
     @Override
     public void init() {
-        BufferedImage louder = load.loadImage(file);
-        width = louder.getWidth();
-        height = louder.getHeight();
-        origin_width = width;
-        origin_height = height;
-        this.setSprite(louder);
-        if(unscaledX == -1 || unscaledY == -1){
-            unscaledX = x;
-            unscaledY = y;
+        if(this.louder == null){
+            louder = load.loadImage(file);
+            width = louder.getWidth();
+            height = louder.getHeight();
+            origin_width = width;
+            origin_height = height;
+            this.setSprite(louder);
+            if(unscaledX == -1 || unscaledY == -1){
+                unscaledX = x;
+                unscaledY = y;
+            }
         }
     }
 

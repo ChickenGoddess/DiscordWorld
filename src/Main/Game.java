@@ -47,16 +47,15 @@ public class Game extends Canvas implements Runnable{
     static int BACKGROUND_OFFSET_X;
     static int BACKGROUND_OFFSET_Y;
     //Player player;
-    Obstacle fence;
-    Obstacle fence2;
+    //Obstacle fence;
+    //Obstacle fence2;
     //static Window window;
     //private static double SCALE = 1.0000000000000000;
     //private static double TEMP = HEIGHT;
     private static BackgroundTexture texture;
     KeyInput input;
     //private static boolean BY_HEIGHT = true;
-    private static int noBorderWidth = 0;
-    private static int noBorderHeight = 0;
+    
     private static volatile int initiated = 0;
     //.cor files are the game files
     //.sav files are the save files
@@ -290,16 +289,5 @@ public class Game extends Canvas implements Runnable{
     public static void setTexture(BackgroundTexture texture){
         Game.texture = texture;
     }
-    public static void setNoBorderWidth(int width){
-        noBorderWidth = width;
-    }
-    public static void setNoBorderHeight(int height){
-        noBorderHeight = height;
-    }
-    public static int getNoBorderWidth(){
-        return noBorderWidth;
-    }
-    public static int getNoBorderHeight(){
-        return noBorderHeight;
-    }
+    
 }
