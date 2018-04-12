@@ -19,6 +19,7 @@ public abstract class OverworldObj extends GameObj{
     protected int triangle;
     protected int prevX;
     protected int prevY;
+    protected static int count = 0;
     
     public OverworldObj(int x, int y, ID id, String name) {
         super(x, y, id, name);
@@ -206,7 +207,9 @@ public abstract class OverworldObj extends GameObj{
                 (this.getUnscaledX() + this.getOriginWidth()) * GameState.getScale() >= object.getPosX() &&
                 (this.getUnscaledY() + this.getOriginHeight()) * GameState.getScale() >= object.getPosY() &&
                 (this.getName() == null ? object.getName() != null : !this.getName().equals(object.getName()))){
-            
+            System.out.println("Collided");
+            count++;
+            System.out.println(count);
             this.setCollided(true);
             object.setCollided(true);
             return true;

@@ -54,8 +54,10 @@ public class Player extends OverworldObj{
         origin_height = height;
         sprites.add(louder);
         this.setSprite(louder);
-        unscaledX = x;
-        unscaledY = y;
+        if(unscaledX == -1 || unscaledY == -1){
+            unscaledX = x;
+            unscaledY = y;
+        }
     }
 
     @Override

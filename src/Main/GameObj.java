@@ -45,6 +45,8 @@ public abstract class GameObj {
         this.name = name;
         this.actX = x + width/2;
         this.actY = y + height/2;
+        this.unscaledX = x;
+        this.unscaledY = y;
     }
     
     public GameObj(Scanner scan){

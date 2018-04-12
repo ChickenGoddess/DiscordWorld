@@ -36,8 +36,10 @@ public class Obstacle extends OverworldObj{
         origin_width = width;
         origin_height = height;
         this.setSprite(louder);
-        unscaledX = x;
-        unscaledY = y;
+        if(unscaledX == -1 || unscaledY == -1){
+            unscaledX = x;
+            unscaledY = y;
+        }
     }
 
     @Override

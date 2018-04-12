@@ -46,8 +46,8 @@ public class WindowChange extends JPanel{
         public void componentResized(ComponentEvent e) {
             prevWidth = GameState.getWidth();
             prevHeight = GameState.getHeight();
-            Game.setNoBorderWidth(Window.getFrame().getContentPane().getWidth());
-            Game.setNoBorderHeight(Window.getFrame().getContentPane().getHeight());
+            //GameState.setNoBorderWidth(Window.getFrame().getContentPane().getWidth());
+            //GameState.setNoBorderHeight(Window.getFrame().getContentPane().getHeight());
             GameState.setWidth(frame.getWidth());
             GameState.setHeight(frame.getHeight());
             if(frame.getWidth() >= frame.getHeight()){
@@ -66,7 +66,7 @@ public class WindowChange extends JPanel{
                 Handler.setBackgroundHeight();
                 //System.out.println("Ayyo");
             }
-            System.out.println("Changed");
+            //System.out.println("Changed");
         }
 
         @Override

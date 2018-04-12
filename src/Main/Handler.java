@@ -49,16 +49,23 @@ public class Handler {
             tempObj.init();
             if(tempObj.getID() == ID.Background){
                 //System.out.println(tempObj.getHeight());
-                BACKGROUND_HEIGHT = tempObj.getHeight();
-                BACKGROUND_WIDTH = tempObj.getWidth();
+                BACKGROUND_HEIGHT = (int)(tempObj.getHeight() * GameState.getScale());
+                BACKGROUND_WIDTH = (int)(tempObj.getWidth() * GameState.getScale());
             }
         }
-        if(BACKGROUND_WIDTH <= Game.WIDTH){
+        if(BACKGROUND_WIDTH <= GameState.getWidth()){
             largerX = true;
         }
-        if(BACKGROUND_HEIGHT <= Game.HEIGHT - 18){
+        else{
+            largerX = false;
+        }
+        if(BACKGROUND_HEIGHT <= GameState.getHeight() - 18){
             largerY = true;
         }
+        else{
+            largerY = false;
+        }
+        //System.out.println("LargerX: " + largerX + "\nLargerY: " + largerY);
         initialized = true;
     }
 
@@ -84,7 +91,7 @@ public class Handler {
         for(OverworldObj tempObj : items){
             this.checkCollision(tempObj);
             if(CHANGE == true){
-                //setChange(false);
+                setChange(false);
                 break;
             }
         }
@@ -113,9 +120,10 @@ public class Handler {
                         //System.out.println("Sprite width/height: " + camera.getTarget().getWidth() + ", " + camera.getTarget().getHeight());
                         //System.out.println("Player Location: " + camera.getTarget().getPosX() + ", " + camera.getTarget().getPosY());
                         //System.out.println("Player Unscaled Location: " + camera.getTarget().getUnscaledX() + ", " + camera.getTarget().getUnscaledY());
-                        System.out.println("Camera Location: " + camera.getPosX() + ", " + camera.getPosY());
+                        //System.out.println("Camera Location: " + camera.getPosX() + ", " + camera.getPosY());
+                        //System.out.println("Scale: " + GameState.getScale());
                         //System.out.println("No Border Width/Height: " + GameState.getNoBorderWidth() + ", " + Game.getNoBorderHeight());
-                        //System.out.println("tempObj.getPosX() + tempObj.getWidth()/2: " + (tempObj.getPosX() + tempObj.getWidth()/2));
+                        //System.out.println("tempObj.getPosX() + tempObj.getWidth()/2: " + tempObj.getName() + ": " + (tempObj.getPosX() + tempObj.getWidth()/2));
                         //System.out.println("Game.getTexture().getSprite().getWidth() - Game.getNoBorderHeight() + Game.BACKGROUND_OFFSET_X: " + (GameState.getTexture().getSprite().getWidth() - GameState.getFrameWidth()/2 + Game.BACKGROUND_OFFSET_X));
                         
                         if(tempObj.getUnscaledX()<= GameState.getOriginWidth()/2 + Game.BACKGROUND_OFFSET_X - camera.getTarget().getOriginWidth()/2){
@@ -237,7 +245,7 @@ public class Handler {
                 
                 tempObj.setActX(tempObj.getUnscaledX() + tempObj.getOriginWidth()/2);
                 tempObj.setActY(tempObj.getUnscaledY() + tempObj.getOriginHeight()/2);
-                //System.out.println(tempObj.getName() + ": (" + tempObj.getActX() + ", " + tempObj.getActY() + ")");
+                //System.out.println(tempObj.getName() + ": (" + tempObj.getPosX() + ", " + tempObj.getPosY() + ")");
                 g.drawImage(tempSprite, xDelta, yDelta, (int)(GameState.getScale() * tempObj.getOriginWidth()), (int)(GameState.getScale() * tempObj.getOriginHeight()), null);
             }
         }
@@ -311,18 +319,26 @@ public class Handler {
                 //System.out.println("TempObj: " + tempObj.getName());
                 //System.out.println("Item: " + item.getName() + "\n");
             }
+            if(tempObj.getID() == ID.Player){    
+                for(Exit exit : exits){
+                    GameState.checkExitCollision(exit);
+                    if(CHANGE == true){
+                        //setChange(false);
+                        break;
+                    }
+                }
+            }
+            if(CHANGE == true){
+                //setChange(false);
+                break;
+            }
+            
             //System.out.println("TempObj: " + tempObj.getName());
             //System.out.println("Item: " + item.getName());
             //System.out.println("Ayyy");
         }
         //System.out.println("");
-        for(Exit exit : exits){
-            GameState.checkExitCollision(exit);
-            if(CHANGE == true){
-                //setChange(false);
-                break;
-            }
-        }
+        
     }
     
     public static void setChange(boolean bool){

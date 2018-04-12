@@ -189,7 +189,13 @@ public class GameState {
             
             //Handler.instance().addOverObj(obj);
         }
+        
         getCurrentRoom().init();
+        Handler.setScaledLocation();
+        Handler.instance().setBackgroundWidth();
+        Handler.instance().setBackgroundHeight();
+        //Handler.changeScaled(true);
+        //Handler.setScaledLocation();
         Handler.instance().init();
     }
     
@@ -297,30 +303,30 @@ public class GameState {
         populateRoom();
         //System.out.println("Scale: " + getScale());
         if(exit.getExitSide() == 0){
-            int nextX = (int)(exit.getDestX()) + (int)(.5 * exit.getDestWidth()) - (int)(.5 * player.getWidth());
-            int nextY = (int)(exit.getDestY()) + (int)(.5 * exit.getDestHeight()) - (int)(.5 * player.getHeight());
+            int nextX = (int)(exit.getDestX()) + (int)(.5 * exit.getDestWidth()) - (int)(.5 * player.getOriginWidth());
+            int nextY = (int)(exit.getDestY()) + (int)(.5 * exit.getDestHeight()) - (int)(.5 * player.getOriginHeight());
             //System.out.println(nextX + " " + nextY);
             spawnPlayer(nextX, nextY);
         } else if(exit.getExitSide() == 1){
-            int nextX = (int)(exit.getDestX()) + (int)(.5 * exit.getDestWidth()) - (int)(.5 * player.getWidth());
+            int nextX = (int)(exit.getDestX()) + (int)(.5 * exit.getDestWidth()) - (int)(.5 * player.getOriginWidth());
             int nextY = (int)(exit.getDestY()) - player.getHeight() - (int)(5);
             //System.out.println(nextX + " " + nextY);
             spawnPlayer(nextX, nextY);
         } else if(exit.getExitSide() == 2){
             int nextX = (int)((exit.getDestX() + exit.getDestWidth())) + (int)(5);
             
-            int nextY = (int)(exit.getDestY()) + (int)(.5 * exit.getDestHeight()) - (int)(.5 * player.getHeight());
+            int nextY = (int)(exit.getDestY()) + (int)(.5 * exit.getDestHeight()) - (int)(.5 * player.getOriginHeight());
             //System.out.println(nextX + " " + nextY);
             spawnPlayer(nextX, nextY);
         } else if(exit.getExitSide() == 3){
-            int nextX = (exit.getDestX()) + (int)(.5 * exit.getDestWidth()) - (int)(.5 * player.getWidth());
+            int nextX = (exit.getDestX()) + (int)(.5 * exit.getDestWidth()) - (int)(.5 * player.getOriginWidth());
             
             int nextY = ((exit.getDestY() + exit.getDestHeight())) + (5);
             //System.out.println(nextX + " " + nextY);
             spawnPlayer(nextX, nextY);
         } else if(exit.getExitSide() == 4){
             int nextX = (int)(exit.getDestX()) - player.getWidth() - (int)(5);
-            int nextY = (int)(exit.getDestY()) + (int)(.5 * exit.getDestHeight()) - (int)(.5 * player.getHeight());
+            int nextY = (int)(exit.getDestY()) + (int)(.5 * exit.getDestHeight()) - (int)(.5 * player.getOriginHeight());
             //System.out.println(nextX + " " + nextY);
             spawnPlayer(nextX, nextY);
         }
@@ -328,11 +334,13 @@ public class GameState {
     }
     
     public static void checkExitCollision(Exit exit){
+        //System.out.println("Player: (" + player.getUnscaledX() + ", " + player.getUnscaledY() + ")");
+        //System.out.println("Exit: (" + exit.getSourceX() + ", " + exit.getSourceY() + ")" + " (" + (exit.getSourceX() + exit.getSourceWidth()) + ", " + (exit.getSourceY() + exit.getSourceHeight()) + ")");
         if(player.getPosX() <= (exit.getSourceX()+ exit.getSourceWidth()) * GameState.getScale() &&
                 player.getPosY() <= (exit.getSourceY() + exit.getSourceWidth()) * GameState.getScale() &&
                 (player.getUnscaledX() + player.getOriginWidth()) * GameState.getScale() >= exit.getSourceX() * GameState.getScale() &&
                 (player.getUnscaledY() + player.getOriginHeight()) * GameState.getScale() >= exit.getSourceY() * GameState.getScale()){
-            //System.out.println("God I'm pretty");
+            System.out.println("Man I'm pretty");
             changeRoom(exit);
         }
     }
