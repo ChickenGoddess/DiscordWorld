@@ -162,6 +162,16 @@ public class GameState {
         player.setUnscaledY(y);
     } 
     
+    public static void init(String roomName){
+        if(player == null){
+            player = new Player(GameState.getWidth(), GameState.getHeight(), "../res/louder.png");
+            setCameraTarget(player);
+            Handler.instance().setCamera(CAMERA);
+        }
+        
+        setCurrentRoom(getRoom(roomName));
+    }
+    
     public static void init(){
         if(player == null){
             player = new Player(GameState.getWidth(), GameState.getHeight(), "../res/louder.png");

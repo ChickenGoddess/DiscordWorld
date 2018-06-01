@@ -20,6 +20,13 @@ public class Window extends Canvas{
     
     private static JFrame frame;
     
+    /**
+     * Creates a window
+     * @param title Window title
+     * @param height Window height
+     * @param width Window width
+     * @param game Game, for adding to the window.
+     */
     public Window(String title, int height, int width, Game game){
         frame = new JFrame();
         WindowChange changer = new WindowChange(frame);

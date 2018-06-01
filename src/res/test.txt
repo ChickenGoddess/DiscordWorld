@@ -23,11 +23,3 @@ fence2
 Link: ../res/fence_tile.png
 ---
 &&&
-Room2
-Offset: (0, 0)
-texture2
-Link: ../res/testpic.png
-Room2 Obstacles:
-&&&
-&&&
-===

@@ -26,98 +26,58 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author Chicken
+ * @author Jon Erickson, Andrew Thompson
  */
 public class Game extends Canvas implements Runnable{
-    
-    //BufferedImage bi;
-    ImageLoader load = new ImageLoader();
+        
     
     private boolean running = false;
     private Thread thread;
-    //static int ORIGIN_WIDTH = 1000;
-    //static int ORIGIN_HEIGHT = 700;
-    //static int WIDTH = ORIGIN_WIDTH;
-    //static int HEIGHT = ORIGIN_HEIGHT;
-    //BufferedImage image;
     static boolean clampedSide = false;
     static boolean clampedUpdown = false;
-    //private static GameCamera camera;
-    //static BackgroundTexture CURRENTTEXTURE;
     static int BACKGROUND_OFFSET_X;
     static int BACKGROUND_OFFSET_Y;
-    //Player player;
-    //Obstacle fence;
-    //Obstacle fence2;
-    //static Window window;
-    //private static double SCALE = 1.0000000000000000;
-    //private static double TEMP = HEIGHT;
     private static BackgroundTexture texture;
-    KeyInput input;
-    //private static boolean BY_HEIGHT = true;
-    
+    KeyInput input;    
     private static volatile int initiated = 0;
-    //.cor files are the game files
-    //.sav files are the save files
     private static String file = "src/res/test.txt";
     private static volatile int sleeper = 0;
     
     public Game() throws FileNotFoundException{
+        
+        
+        //Create reader
         Scanner scan = new Scanner(new BufferedReader(new FileReader(file)));
-        //Player player = new Player(0, 0, "../res/fence_tile.png");
+        
+        //Load game data from file
         GameState.loadGame(scan, this);
-        GameState.init();
-        //setBackgroundOffset(0, 0);
-        //Window window = new Window("Practice", 400, 400, this);
-        //player = new Player(WIDTH/2, HEIGHT/2, ID.Player);
-        //fence = new Obstacle(WIDTH/2, HEIGHT/2, "Fence", "../res/fence_tile.png");
-        //fence2 = new Obstacle(WIDTH, HEIGHT, "Fence2", "../res/fence_tile.png");
-        //spawnPlayer(400, 400);
+        
+        //Initialize game data from file
+        GameState.init("Room1");
+        
+        //Create key input and add to listener
         input = new KeyInput(Handler.instance());
         this.addKeyListener(input);
-        //texture = new BackgroundTexture(BACKGROUND_OFFSET_X, BACKGROUND_OFFSET_Y, "Background_1", "../res/LARGE_elevation.jpg");
-        //Handler.instance().addObj(texture);
-        
-        //Room room = new Room("Room 1", GameState.getPlayer(), texture);
-        //GameState.addRoom(room);
-        //GameState.setCurrentRoom(room);
-        //room.setTexture(texture);
-        //room.addObject(fence);
-        //room.addObject(fence2);
-        GameState.init();
-        //GameState.spawnPlayer(400, 400);
-        //room.spawnObj(fence, 600, 500);
-        //room.spawnObj(fence2, 900, 800);
-        //room.init();
+
+        //Add objects to handler for graphics
         GameState.populateRoom();
-        //Handler.instance().addObj(fence);
-        //Handler.instance().addObj(fence2);
-        //Handler.instance().addObj(player);
-        //Handler.instance().addOverObj(fence);
-        //Handler.instance().addOverObj(fence2);
-        //Handler.instance().addOverObj(player);
-        //camera = new GameCamera(player);
-        //Handler.instance().setCamera(camera);
-        //Handler.instance().addObj(camera);
-        //CURRENTTEXTURE = texture;
-        //bi = load.loadImage("C:\\Users\\Chicken\\Documents\\NetBeansProjects\\DiscordWorld\\testpic.PNG");
-        //Handler.instance().init();
+        
+        //Set to initialized so the game can begin
         initiated();
     }
     
-    
-    
-    void setBackgroundOffset(int x, int y){
-        BACKGROUND_OFFSET_X = x;
-        BACKGROUND_OFFSET_Y = y;
-    }
-    
+    /**
+     * Begins thread
+     */
     public synchronized void start(){
         running = true;
         thread = new Thread(this);
         thread.start();
     }
     
+    /**
+     * Ends thread
+     */
     public synchronized void stop(){
         try{
             thread.join();
@@ -128,6 +88,10 @@ public class Game extends Canvas implements Runnable{
         }
     }
     
+    /**
+     * Main method
+     * @param args Command line argument, unnecessary
+     */
     public static void main(String[] args){
         try{
             Game game = new Game();
@@ -138,15 +102,20 @@ public class Game extends Canvas implements Runnable{
         
     }
     
+    /**
+     * Sets initiated to 1 to break from while loop
+     */
     public static void initiated(){
         initiated = 1;
     }
     
+    /**
+     * Runs the program, does not exit this while loop until program is finished
+     */
     @Override
     public void run() {
         while(initiated == 0){
-            //do nothing
-            //System.out.print("");
+            //do nothing until assets are loaded
         }
         double lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
@@ -192,11 +161,15 @@ public class Game extends Canvas implements Runnable{
                 */
                 frames = 0;
             }
+            
+            //Limit frame rate
             try {
                 Thread.sleep(16); //Pause thread for x milliseconds. May need to adjust this value later.
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            
+            //Does something, can't remember lol
             if(initiated == 0){
                 try{
                     Thread.sleep(sleeper);
@@ -210,11 +183,16 @@ public class Game extends Canvas implements Runnable{
         stop();
     }
 
+    /**
+     * Calls the tick command for updating objects
+     */
     public void tick(){
         Handler.instance().tick();
     }
     
-    
+    /**
+     * Renders the graphics associated with the objects
+     */
     public void render(){
         BufferStrategy bs = getBufferStrategy();
         if(bs == null){
@@ -231,7 +209,13 @@ public class Game extends Canvas implements Runnable{
         bs.show();
     }  
     
-    
+    /**
+     * To be moved to GameState class
+     * @param var
+     * @param min
+     * @param max
+     * @return 
+     */
     public static int clamp(int var, int min, int max){
         
         if(var >= max){
@@ -246,6 +230,13 @@ public class Game extends Canvas implements Runnable{
         
     }
     
+    /**
+     * To be moved to GameState class.
+     * @param var
+     * @param min
+     * @param max
+     * @return 
+     */
     public static int reverseBackgroundClamp(int var, int min, int max){
         
         if(var >= min){
@@ -259,35 +250,19 @@ public class Game extends Canvas implements Runnable{
         }        
     }
     
+    /**
+     * To be moved to GameState class.
+     * @return 
+     */
     public static boolean isClampedSide(){
         return clampedSide;
     }
     
     /**
-     * 
+     * To be moved to GameState class.
      * @return whether clamp is in effect
      */
     public static boolean isClampedUpdown(){
         return clampedUpdown;
     }
-    
-    
-    /*
-    public static int getFrameWidth(){
-        return WIDTH;
-    }
-    public static int getFrameHeight(){
-        return HEIGHT;
-    }
-    */
-    
-    
-    
-    public static BackgroundTexture getTexture(){
-        return texture;
-    }
-    public static void setTexture(BackgroundTexture texture){
-        Game.texture = texture;
-    }
-    
 }

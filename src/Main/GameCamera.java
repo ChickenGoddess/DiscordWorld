@@ -9,18 +9,33 @@ import java.awt.Graphics;
  */
 
 /**
- *
+ *I am really fucking proud of this class. I feel very accomplished for having made this.
  * @author Chicken
  */
 public class GameCamera extends GameObj {
+    
+    //THe target which the camera will follow, basically what is viewed.
     private GameObj target;
+    
+    //Determines if the camera is following on the X or Y coordinates.
     private boolean followX;
     private boolean followY;
     
+    
+    /**
+     * Creates the camera at a specific location
+     * @param x
+     * @param y 
+     */
     public GameCamera(int x, int y){
         super(x, y, ID.Camera, "Camera");
     }
 
+    /**
+     * Creates the camera following a specific target, and whether it's following the target when constructed.
+     * @param target
+     * @param following 
+     */
     public GameCamera(GameObj target, boolean following) {
         super(0, 0, ID.Camera, "Camera");
         this.target = target;
@@ -32,18 +47,23 @@ public class GameCamera extends GameObj {
         origin_height = height;
     }
 
+    /**
+     * Creates the camera following a specific target.
+     * @param target 
+     */
     public GameCamera(GameObj target) {
         this(target, true);
     }
 
+    /**
+     * Sets the location of the camera based on whether it's following the target.
+     */
     @Override
     public void tick() {
         
-        //System.out.println("Following: " + followX + ", " + followY);
         if (this.target != null && this.followX && this.followY) {
             this.setX(this.target.getPosX() - GameState.getWidth()/2 + this.target.getWidth()/2);
             this.setY(this.target.getPosY() - GameState.getHeight()/2 + this.target.getHeight()/2);
-            //System.out.println("Camera working?");
         }
         else if(this.target != null && this.followX && !this.followY){
             this.setY(y);
@@ -59,10 +79,19 @@ public class GameCamera extends GameObj {
         }
     }
     
+    /**
+     * 
+     * @return target
+     */
     public GameObj getTarget() {
         return this.target;
     }
     
+    /**
+     * Sets the following variables.
+     * @param followX
+     * @param followY 
+     */
     public void setFollowing(boolean followX, boolean followY){
         this.followX = followX;
         this.followY = followY;
@@ -84,6 +113,9 @@ public class GameCamera extends GameObj {
     public void render(Graphics g){};
     
     @Override
+    /**
+     * Initializes the camera with no sprite
+     */
     public void init(){ 
         this.setSprite(null);
     };
