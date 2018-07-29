@@ -7,16 +7,17 @@ package Events;
 
 /**
  *
- * @author User
+ * @author Owner
  */
-public abstract class Event {
-    
-    protected String params;
-    
-    public Event(String s){
-        params = s;
+public class TextEvent extends Event{
+
+    public TextEvent(String s) {
+        super(s);
     }
 
-    public abstract void trigger();
+    @Override
+    public void trigger() {
+        
+    }
     
 }

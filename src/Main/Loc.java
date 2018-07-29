@@ -3,20 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Events;
+package Main;
 
 /**
  *
- * @author User
+ * @author Owner
  */
-public abstract class Event {
-    
-    protected String params;
-    
-    public Event(String s){
-        params = s;
-    }
-
-    public abstract void trigger();
-    
+public enum Loc {
+    TextBox(),
+    Menu(),
+    Field(),
+    Event();
 }

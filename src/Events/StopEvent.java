@@ -7,16 +7,12 @@ package Events;
 
 /**
  *
- * @author User
+ * @author Owner
  */
-public class EquipEvent extends Event{
+public class StopEvent extends Event{
 
-    public EquipEvent(String s) {
+    public StopEvent(String s) {
         super(s);
-    }
-
-    public boolean match(){
-        return true;
     }
 
     @Override

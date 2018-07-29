@@ -5,23 +5,21 @@
  */
 package Events;
 
+import Main.GameState;
+
 /**
  *
- * @author User
+ * @author Owner
  */
-public class EquipEvent extends Event{
+public class SetLocEvent extends Event{
 
-    public EquipEvent(String s) {
+    public SetLocEvent(String s) {
         super(s);
-    }
-
-    public boolean match(){
-        return true;
     }
 
     @Override
     public void trigger() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        GameState.setLocState(params);
     }
 
 }

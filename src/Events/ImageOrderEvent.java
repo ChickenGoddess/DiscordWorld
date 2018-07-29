@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package EventHandledClasses;
+package Events;
 
 import Rooms.Room;
 import java.io.BufferedReader;
@@ -15,19 +15,21 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class ImageOrderer {
+public class ImageOrderEvent extends Event{
     
     private String filename;
     private String currentRoomName;
     private Room currentRoom;
-    
-    public ImageOrderer(){
-        
-    }
-    
-    public ImageOrderer(String filename) throws FileNotFoundException{
+
+    public ImageOrderEvent(String s) throws FileNotFoundException{
+        super(s);
         Scanner scan = new Scanner(new BufferedReader(new FileReader(filename)));
         String line;
     }
-    
+
+    @Override
+    public void trigger() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

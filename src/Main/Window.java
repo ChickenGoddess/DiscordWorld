@@ -5,6 +5,8 @@ import EventHandledClasses.WindowChange;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

@@ -21,6 +21,7 @@ public class KeyInput extends KeyAdapter{
     private Handler handler;
     private int playerVel = 1;
     private final Set<Integer> pressed = new HashSet<Integer>();
+    private Loc lock = Loc.Field;
     private boolean dir1 = false;
     private boolean dir2 = false;
     private boolean dir3 = false;
@@ -29,6 +30,21 @@ public class KeyInput extends KeyAdapter{
     private int zoom = 0;
     public KeyInput(Handler handler){
         this.handler = handler;
+    }
+    
+    public void setLock(String text){
+        if(text.matches("Field")){
+            lock = Loc.Field;
+        }
+        else if(text.matches("Textbox")){
+            lock = Loc.TextBox;
+        }
+        else if(text.matches("Menu")){
+            lock = Loc.Menu;
+        }
+        else if(text.matches("Event")){
+            lock = Loc.Event;
+        }
     }
     
     @Override

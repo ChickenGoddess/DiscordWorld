@@ -51,6 +51,10 @@ public class GameState {
         return GameState.CURRENT_ROOM;
     }
     
+    public static void setLocState(String text){
+        Game.getKeyInput().setLock(text);
+    }
+    
     public static void loadGame(Scanner scan, Game game){
         
         String line = scan.nextLine();
@@ -103,6 +107,7 @@ public class GameState {
                         room.addObject(obj);
                         line = scan.nextLine();
                     }
+                    //line = scan.nextLine();
                 }
                 //room.init();
                 line = scan.nextLine();

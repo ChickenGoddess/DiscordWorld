@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.util.LinkedList;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import javax.swing.JTextField;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,6 +21,7 @@ import java.util.List;
  */
 public class Handler {
     
+    public JTextField textbox;
     public static List<GameObj> objects = new LinkedList<>();
     public static List<OverworldObj> items = new LinkedList<>();
     public static List<Exit> exits = new LinkedList<>();

@@ -38,7 +38,7 @@ public class Game extends Canvas implements Runnable{
     static int BACKGROUND_OFFSET_X;
     static int BACKGROUND_OFFSET_Y;
     private static BackgroundTexture texture;
-    KeyInput input;    
+    private static KeyInput input;    
     private static volatile int initiated = 0;
     private static String file = "src/res/test.txt";
     private static volatile int sleeper = 0;
@@ -64,6 +64,10 @@ public class Game extends Canvas implements Runnable{
         
         //Set to initialized so the game can begin
         initiated();
+    }
+    
+    public static KeyInput getKeyInput(){
+        return input;
     }
     
     /**
